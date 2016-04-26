@@ -1,5 +1,0 @@
-public class finishGameTestDrive {
-
-    public static void main (String[] args) {
-
-        DotComBust dcbt = new DotComBust();
