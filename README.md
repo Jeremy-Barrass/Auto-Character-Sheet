@@ -15,3 +15,11 @@ As a player, so that I can easily view the Feat options available, I would like 
 As a player, so that I can decide on which character class to choose, I would like to see a summary of that class' key abilities and bonuses.
 
 As a player, so that I can decide on which Feat to choose, I would like to see a summar of the Feat.
+
+## Job Stories (as a user stories alternative)
+
+<img src="images/job_story_1">
+
+## Domain Mapping and Sequence Diagrams
+
+<img src="images/domain_mapping_and_sequence_diagrams">
