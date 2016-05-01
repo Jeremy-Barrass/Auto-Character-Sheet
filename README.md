@@ -18,8 +18,8 @@ As a player, so that I can decide on which Feat to choose, I would like to see a
 
 ## Job Stories (as a user stories alternative)
 
-<img src="images/job_story_1">
+<img src="images/job_story_1.JPG">
 
 ## Domain Mapping and Sequence Diagrams
 
-<img src="images/domain_mapping_and_sequence_diagrams">
+<img src="images/domain_mapping_and_sequence_diagrams.JPG">
