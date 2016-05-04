@@ -13,4 +13,8 @@ public class CharacterSheet {
 	public String getCharacterName() {
 		return characterName;
 	}
+
+	public void generateGui() {
+        Gui gui = new Gui();
+    }
 }
