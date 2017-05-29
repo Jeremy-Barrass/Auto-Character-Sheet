@@ -20,5 +20,6 @@
     </orderEntry>
     <orderEntry type="library" name="mockito-core-1.10.19" level="project" />
     <orderEntry type="library" name="junit-4.12" level="project" />
+    <orderEntry type="library" name="powermock-api-mockito-common-1.6.5" level="project" />
   </component>
 </module>

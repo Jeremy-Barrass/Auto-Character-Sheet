@@ -1,19 +1,22 @@
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.io.IOException;
-
 import static org.junit.Assert.assertEquals;
-import static org.powermock.api.mockito.PowerMockito.verifyNew;
-import static org.powermock.api.mockito.PowerMockito.whenNew;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(CharacterSheet.class)
+@PowerMockIgnore("javax.management")
 public class TestCharacterSheet {
 	String name = "Manetherin";
-	CharacterSheet manny = new CharacterSheet(name);
+	Gui mockGui = mock(Gui.class);
+	CharacterSheet manny = new CharacterSheet(name, mockGui);
 
 	@Test
 	public void testGetCharacterName() {
@@ -28,10 +31,9 @@ public class TestCharacterSheet {
 	}
 
 	@Test
-	public void testGenerateGui() throws Exception {
-		whenNew(Gui.class).withNoArguments().thenThrow(new IOException("error message"));
+	public void testGenerateGui() {
 		manny.generateGui();
-		verifyNew(Gui.class).withNoArguments();
+        verify(mockGui, times(1)).Run();
 	}
 
 

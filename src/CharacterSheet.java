@@ -1,9 +1,18 @@
+import interfaces.iGui;
+
 public class CharacterSheet {
 
+	private iGui Gui;
 	private String characterName;
 
-	public CharacterSheet(String name) {
+
+    public CharacterSheet() {
+        this("", new Gui());
+    }
+
+    public CharacterSheet(String name, iGui gui) {
 		this.characterName = name;
+		this.Gui = gui;
 	}
 
 	public void setCharacterName(String name) {
@@ -15,6 +24,11 @@ public class CharacterSheet {
 	}
 
 	public void generateGui() {
-        Gui gui = new Gui();
+        Gui.Run();
+    }
+
+    public static void main(String[] args) {
+        CharacterSheet sheet = new CharacterSheet();
+        sheet.generateGui();
     }
 }
