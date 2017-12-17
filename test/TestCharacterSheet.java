@@ -31,7 +31,7 @@ public class TestCharacterSheet {
 	@Test
 	public void testGenerateGui() {
 		manny.generateGui();
-        verify(mockGui, times(1)).Run();
+        verify(mockGui, times(1)).Run(mockAbilities);
 	}
 
 

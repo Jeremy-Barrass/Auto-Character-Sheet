@@ -1,31 +1,42 @@
+import interfaces.iAbilities;
 import interfaces.iGui;
 import javax.swing.*;
 import java.awt.*;
 
 public class Gui implements iGui {
     private JFrame f;
-    private JPanel abilities;
-    private JLabel ability;
+    private JPanel abilitiesDisplay;
+    private JPanel abilityTitles;
+    private JPanel abilityScores;
+    private JLabel title;
+    private JLabel score;
 
-    private void displayAbilities() {
-        abilities = new JPanel();
+    private void displayAbilities(iAbilities abilities) {
+        abilitiesDisplay = new JPanel();
+        abilityTitles = new JPanel();
+        abilityScores = new JPanel();
         for (String statName : Abilities.ListAbilityNames()) {
-            ability = new JLabel(statName);
-            abilities.add(ability);
+            title = new JLabel(statName);
+            abilityTitles.add(title);
+            score = new JLabel(Integer.toString(abilities.GetAbilityScore(statName)));
+            abilityScores.add(score);
         }
-        abilities.setLayout(new BoxLayout(abilities, BoxLayout.Y_AXIS));
+        abilityTitles.setLayout(new BoxLayout(abilityTitles, BoxLayout.Y_AXIS));
+        abilityScores.setLayout(new BoxLayout(abilityScores, BoxLayout.Y_AXIS));
+        abilitiesDisplay.add(abilityTitles);
+        abilitiesDisplay.add(abilityScores);
     }
 
     private void frameSetUp() {
         f = new JFrame("Pathfinder Character Sheet");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.getContentPane().add(BorderLayout.WEST, abilities);
+        f.getContentPane().add(BorderLayout.WEST, abilitiesDisplay);
         f.setSize(900, 700);
         f.setVisible(true);
     }
 
-    public void Run() {
-        displayAbilities();
+    public void Run(iAbilities abilities) {
+        displayAbilities(abilities);
         frameSetUp();
     }
 }

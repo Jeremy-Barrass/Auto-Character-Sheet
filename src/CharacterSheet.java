@@ -27,7 +27,7 @@ public class CharacterSheet {
 	}
 
 	public void generateGui() {
-        Gui.Run();
+        Gui.Run(this.AbilityScores);
     }
 
     public static void main(String[] args) {
