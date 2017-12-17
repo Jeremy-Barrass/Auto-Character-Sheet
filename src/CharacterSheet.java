@@ -1,26 +1,29 @@
+import interfaces.iAbilities;
 import interfaces.iGui;
 
 public class CharacterSheet {
 
 	private iGui Gui;
-	private String characterName;
+	private String CharacterName;
+	private iAbilities AbilityScores;
 
 
     public CharacterSheet() {
-        this("", new Gui());
+        this("", new Gui(), new Abilities());
     }
 
-    public CharacterSheet(String name, iGui gui) {
-		this.characterName = name;
+    public CharacterSheet(String name, iGui gui, iAbilities abilities) {
+		this.CharacterName = name;
 		this.Gui = gui;
+		this.AbilityScores = abilities;
 	}
 
 	public void setCharacterName(String name) {
-		this.characterName = name;
+		this.CharacterName = name;
 	}
 
 	public String getCharacterName() {
-		return characterName;
+		return CharacterName;
 	}
 
 	public void generateGui() {

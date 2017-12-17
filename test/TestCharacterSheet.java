@@ -5,10 +5,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(CharacterSheet.class)
@@ -16,7 +13,8 @@ import static org.mockito.Mockito.verify;
 public class TestCharacterSheet {
 	String name = "Manetherin";
 	Gui mockGui = mock(Gui.class);
-	CharacterSheet manny = new CharacterSheet(name, mockGui);
+	Abilities mockAbilities = mock(Abilities.class);
+	CharacterSheet manny = new CharacterSheet(name, mockGui, mockAbilities);
 
 	@Test
 	public void testGetCharacterName() {

@@ -9,8 +9,8 @@ public class Gui implements iGui {
 
     private void displayAbilities() {
         abilities = new JPanel();
-        for(String name : Abilities.names) {
-            ability = new JLabel(name);
+        for (String statName : Abilities.ListAbilityNames()) {
+            ability = new JLabel(statName);
             abilities.add(ability);
         }
         abilities.setLayout(new BoxLayout(abilities, BoxLayout.Y_AXIS));
