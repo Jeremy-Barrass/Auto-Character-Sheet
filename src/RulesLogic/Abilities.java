@@ -3,20 +3,14 @@ package RulesLogic;
 import interfaces.iAbilities;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Hashtable;
+
+import static SheetConstants.AbilityNames.*;
 
 /**
  * Created by jeremy on 29/05/17.
  */
 public class Abilities implements iAbilities, Serializable {
-    private static final String Strength = "Strength";
-    private static final String Dexterity = "Dexterity";
-    private static final String Constitution = "Constitution";
-    private static final String Intelligence = "Intelligence";
-    private static final String Wisdom = "Wisdom";
-    private static final String Charisma = "Charisma";
-
-
     private int StrengthScore;
     private int DexterityScore;
     private int ConstitutionScore;
@@ -38,17 +32,6 @@ public class Abilities implements iAbilities, Serializable {
     public Abilities() {
         AbilityMap = new Hashtable<String, Integer>();
         SetAbilities();
-    }
-
-    public String[] ListAbilityNames() {
-        return new String[] {
-                Strength,
-                Dexterity,
-                Constitution,
-                Intelligence,
-                Wisdom,
-                Charisma
-        };
     }
 
     public int GetAbilityScore(String ability) {

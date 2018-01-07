@@ -1,6 +1,7 @@
 package Gui.Display;
 
 import Gui.JColumn;
+import SheetConstants.AbilityNames;
 import interfaces.iAbilities;
 import interfaces.iDisplay;
 
@@ -21,7 +22,7 @@ public class AbilitiesDisplay extends JPanel implements iDisplay, Serializable {
     public void Display(){
         abilityTitles = new JColumn();
         abilityScores = new JColumn();
-        for (String statName : _abilities.ListAbilityNames()) {
+        for (String statName : AbilityNames.ListAbilityNames()) {
             title = new JLabel(statName);
             abilityTitles.add(title);
             score = new JLabel(Integer.toString(_abilities.GetAbilityScore(statName)));
