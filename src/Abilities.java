@@ -37,7 +37,7 @@ public class Abilities implements iAbilities {
         SetAbilities();
     }
 
-    public static String[] ListAbilityNames() {
+    public String[] ListAbilityNames() {
         return new String[] {
                 Strength,
                 Dexterity,
