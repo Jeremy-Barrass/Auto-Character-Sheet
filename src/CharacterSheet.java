@@ -1,8 +1,11 @@
 import Gui.Gui;
+import RulesLogic.Abilities;
 import interfaces.iAbilities;
 import interfaces.iGui;
 
-public class CharacterSheet {
+import java.io.Serializable;
+
+public class CharacterSheet implements Serializable {
 
 	private iGui Gui;
 	private String CharacterName;

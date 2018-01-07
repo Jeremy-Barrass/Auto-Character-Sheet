@@ -1,33 +1,22 @@
 package Gui;
 
+import Gui.Display.AbilitiesDisplay;
 import interfaces.iAbilities;
 import interfaces.iGui;
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
-public class Gui implements iGui {
+public class Gui implements iGui, Serializable {
     private JFrame f;
     private JTabbedPane tabs;
     private JPanel characterSheet;
     private JPanel sheetEditor;
-    private JPanel abilitiesDisplay;
-    private JColumn abilityTitles;
-    private JColumn abilityScores;
-    private JLabel title;
-    private JLabel score;
+    private AbilitiesDisplay abilitiesDisplay;
 
     private void displayAbilities(iAbilities abilities) {
-        abilitiesDisplay = new JPanel();
-        abilityTitles = new JColumn();
-        abilityScores = new JColumn();
-        for (String statName : abilities.ListAbilityNames()) {
-            title = new JLabel(statName);
-            abilityTitles.add(title);
-            score = new JLabel(Integer.toString(abilities.GetAbilityScore(statName)));
-            abilityScores.add(score);
-        }
-        abilitiesDisplay.add(abilityTitles);
-        abilitiesDisplay.add(abilityScores);
+        abilitiesDisplay = new AbilitiesDisplay(abilities);
+        abilitiesDisplay.Display();
     }
 
     private void characterSheetSetUp() {

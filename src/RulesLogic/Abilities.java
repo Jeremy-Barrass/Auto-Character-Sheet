@@ -1,11 +1,14 @@
+package RulesLogic;
+
 import interfaces.iAbilities;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Created by jeremy on 29/05/17.
  */
-public class Abilities implements iAbilities {
+public class Abilities implements iAbilities, Serializable {
     private static final String Strength = "Strength";
     private static final String Dexterity = "Dexterity";
     private static final String Constitution = "Constitution";

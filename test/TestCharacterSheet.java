@@ -1,4 +1,5 @@
 import Gui.Gui;
+import RulesLogic.Abilities;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
