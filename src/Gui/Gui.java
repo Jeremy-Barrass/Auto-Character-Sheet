@@ -1,3 +1,5 @@
+package Gui;
+
 import interfaces.iAbilities;
 import interfaces.iGui;
 import javax.swing.*;
