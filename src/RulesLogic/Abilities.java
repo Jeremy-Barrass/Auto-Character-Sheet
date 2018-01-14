@@ -4,13 +4,14 @@ import interfaces.iAbilities;
 
 import java.io.Serializable;
 import java.util.Hashtable;
+import java.util.Observable;
 
 import static SheetConstants.AbilityNames.*;
 
 /**
  * Created by jeremy on 29/05/17.
  */
-public class Abilities implements iAbilities, Serializable {
+public class Abilities extends Observable implements iAbilities, Serializable {
     private int StrengthScore;
     private int DexterityScore;
     private int ConstitutionScore;
@@ -27,6 +28,7 @@ public class Abilities implements iAbilities, Serializable {
         AbilityMap.put(Intelligence, IntelligenceScore);
         AbilityMap.put(Wisdom, WisdomScore);
         AbilityMap.put(Charisma, CharismaScore);
+        this.setChanged();
     }
 
     public Abilities() {
@@ -62,4 +64,6 @@ public class Abilities implements iAbilities, Serializable {
         }
         SetAbilities();
     }
+
+
 }

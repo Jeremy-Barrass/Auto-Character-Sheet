@@ -34,7 +34,9 @@ public class Gui implements iGui, Serializable {
     private void sheetEditorSetUp() {
         sheetEditor = new JPanel();
         sheetEditor.setLayout(new BorderLayout());
-        sheetEditor.add(WEST, abilityEditor);
+        JGridPanel westPanel = new JGridPanel(5, 1);
+        westPanel.add(abilityEditor);
+        sheetEditor.add(WEST, westPanel);
     }
 
     private void tabSetUp() {
