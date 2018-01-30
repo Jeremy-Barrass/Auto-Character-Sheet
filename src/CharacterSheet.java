@@ -1,20 +1,41 @@
-public class CharacterSheet {
+import Gui.Gui;
+import RulesLogic.Abilities;
+import interfaces.iAbilities;
+import interfaces.iGui;
 
-	private String characterName;
+import java.io.Serializable;
 
-	public CharacterSheet(String name) {
-		this.characterName = name;
+public class CharacterSheet implements Serializable {
+
+	private iGui Gui;
+	private String CharacterName;
+	private iAbilities AbilityScores;
+
+
+    public CharacterSheet() {
+        this("", new Gui(), new Abilities());
+    }
+
+    public CharacterSheet(String name, iGui gui, iAbilities abilities) {
+		this.CharacterName = name;
+		this.Gui = gui;
+		this.AbilityScores = abilities;
 	}
 
 	public void setCharacterName(String name) {
-		this.characterName = name;
+		this.CharacterName = name;
 	}
 
 	public String getCharacterName() {
-		return characterName;
+		return CharacterName;
 	}
 
 	public void generateGui() {
-        Gui gui = new Gui();
+        Gui.Run(this.AbilityScores);
+    }
+
+    public static void main(String[] args) {
+        CharacterSheet sheet = new CharacterSheet();
+        sheet.generateGui();
     }
 }
