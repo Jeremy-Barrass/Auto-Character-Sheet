@@ -14,7 +14,7 @@ import java.util.Observer;
 public class CosmeticsDisplay extends JPanel implements iDisplay, Serializable, Observer {
     private CosmeticDetails details;
     private Hashtable<String, JLabel> map;
-    private JLabel label;
+    private JLabel detailLabel;
     private JLabel detail;
 
     public CosmeticsDisplay(iCosmeticDetails details) {
@@ -24,11 +24,11 @@ public class CosmeticsDisplay extends JPanel implements iDisplay, Serializable, 
     }
 
     public void display() {
-        label = new JLabel();
-        detail = new JLabel();
         for (String label : CosmeticDetailsLabels.listCosmeticDetails()) {
-            this.label.setText(label);
-            add(this.label);
+            detailLabel = new JLabel();
+            detailLabel.setText(label);
+            add(detailLabel);
+            detail = new JLabel();
             detail.setText(details.getDetail(label));
             add(detail);
             map.put(label, detail);

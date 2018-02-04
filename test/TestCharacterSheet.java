@@ -1,3 +1,4 @@
+import CharacterCosmetics.CosmeticDetails;
 import Gui.Gui;
 import RulesLogic.Abilities;
 import org.junit.Test;
@@ -16,7 +17,8 @@ public class TestCharacterSheet {
 	String name = "Manetherin";
 	Gui mockGui = mock(Gui.class);
 	Abilities mockAbilities = mock(Abilities.class);
-	characterSheet manny = new characterSheet(name, mockGui, mockAbilities);
+	CosmeticDetails mockDetails = mock(CosmeticDetails.class);
+	characterSheet manny = new characterSheet(name, mockGui, mockAbilities, mockDetails);
 
 	@Test
 	public void testGetCharacterName() {
@@ -33,7 +35,7 @@ public class TestCharacterSheet {
 	@Test
 	public void testGenerateGui() {
 		manny.generateGui();
-        verify(mockGui, times(1)).run(mockAbilities);
+        verify(mockGui, times(1)).run(mockAbilities, mockDetails);
 	}
 
 

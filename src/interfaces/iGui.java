@@ -1,5 +1,5 @@
 package interfaces;
 
 public interface iGui {
-    void run(iAbilities abilities);
+    void run(iAbilities abilities, iCosmeticDetails details);
 }
