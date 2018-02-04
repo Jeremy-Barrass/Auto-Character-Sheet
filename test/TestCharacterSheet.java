@@ -10,13 +10,13 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(CharacterSheet.class)
+@PrepareForTest(characterSheet.class)
 @PowerMockIgnore("javax.management")
 public class TestCharacterSheet {
 	String name = "Manetherin";
 	Gui mockGui = mock(Gui.class);
 	Abilities mockAbilities = mock(Abilities.class);
-	CharacterSheet manny = new CharacterSheet(name, mockGui, mockAbilities);
+	characterSheet manny = new characterSheet(name, mockGui, mockAbilities);
 
 	@Test
 	public void testGetCharacterName() {
@@ -33,7 +33,7 @@ public class TestCharacterSheet {
 	@Test
 	public void testGenerateGui() {
 		manny.generateGui();
-        verify(mockGui, times(1)).Run(mockAbilities);
+        verify(mockGui, times(1)).run(mockAbilities);
 	}
 
 

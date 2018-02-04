@@ -12,31 +12,32 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class CosmeticsDisplay extends JPanel implements iDisplay, Serializable, Observer {
-    private CosmeticDetails Details;
-    private Hashtable<JLabel, JLabel> Map;
-    private JLabel Label;
-    private JLabel Detail;
+    private CosmeticDetails details;
+    private Hashtable<String, JLabel> map;
+    private JLabel label;
+    private JLabel detail;
 
     public CosmeticsDisplay(iCosmeticDetails details) {
-        Details = (CosmeticDetails) details;
-        Map = new Hashtable<>();
+        this.details = (CosmeticDetails) details;
+        this.details.addObserver(this);
+        map = new Hashtable<>();
     }
 
-    public void Display() {
-        Label = new JLabel();
-        Detail = new JLabel();
-        for (String label : CosmeticDetailsLabels.ListCosmeticDetails()) {
-            Label.setText(label);
-            add(Label);
-            Detail.setText(Details.GetDetail(label));
-            add(Detail);
-            Map.put(Label, Detail);
+    public void display() {
+        label = new JLabel();
+        detail = new JLabel();
+        for (String label : CosmeticDetailsLabels.listCosmeticDetails()) {
+            this.label.setText(label);
+            add(this.label);
+            detail.setText(details.getDetail(label));
+            add(detail);
+            map.put(label, detail);
         }
     }
 
     public void update(Observable o, Object arg) {
-        CosmeticDetails details = (CosmeticDetails) o;
+        CosmeticDetails observableDetails = (CosmeticDetails) o;
         String changedDetail = (String) arg;
-        Map.get(changedDetail).setText(Details.GetDetail(changedDetail));
+        map.get(changedDetail).setText(observableDetails.getDetail(changedDetail));
     }
 }

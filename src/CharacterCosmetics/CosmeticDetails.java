@@ -12,16 +12,16 @@ public class CosmeticDetails extends Observable implements iCosmeticDetails, Ser
 
     public CosmeticDetails() {
         Details = new Hashtable<String, String>();
-        for (String label : CosmeticDetailsLabels.ListCosmeticDetails()) {
+        for (String label : CosmeticDetailsLabels.listCosmeticDetails()) {
             Details.put(label, "");
         }
     }
 
-    public String GetDetail(String detail) {
+    public String getDetail(String detail) {
         return Details.get(detail);
     }
 
-    public void SetDetail(String label, String detail) {
+    public void setDetail(String label, String detail) {
         if (!Details.keySet().contains(label)) return;
 
         Details.put(label, detail);

@@ -14,7 +14,7 @@ public final class CosmeticDetailsLabels implements Serializable {
     public static final String Eyes = "Eyes";
     public static final String Languages = "Languages";
 
-    public static String[] ListCosmeticDetails() {
+    public static String[] listCosmeticDetails() {
         return new String[] {
                 CharacterName,
                 Player,

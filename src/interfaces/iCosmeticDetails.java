@@ -1,6 +1,6 @@
 package interfaces;
 
 public interface iCosmeticDetails {
-    String GetDetail(String detail);
-    void SetDetail(String label, String detail);
+    String getDetail(String detail);
+    void setDetail(String label, String detail);
 }

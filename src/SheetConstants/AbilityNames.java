@@ -10,7 +10,7 @@ public final class AbilityNames implements Serializable {
     public static final String Wisdom = "Wisdom";
     public static final String Charisma = "Charisma";
 
-    public static String[] ListAbilityNames() {
+    public static String[] listAbilityNames() {
         return new String[]{
                 Strength,
                 Dexterity,

@@ -21,8 +21,8 @@ public class Gui implements iGui, Serializable {
     private void displayAbilities(iAbilities abilities) {
         abilitiesDisplay = new AbilitiesDisplay(abilities);
         abilityEditor = new AbilityEditor(abilities);
-        abilitiesDisplay.Display();
-        abilityEditor.Display();
+        abilitiesDisplay.display();
+        abilityEditor.display();
     }
 
     private void characterSheetSetUp() {
@@ -56,7 +56,7 @@ public class Gui implements iGui, Serializable {
         f.setVisible(true);
     }
 
-    public void Run(iAbilities abilities) {
+    public void run(iAbilities abilities) {
         displayAbilities(abilities);
         frameSetUp();
     }
