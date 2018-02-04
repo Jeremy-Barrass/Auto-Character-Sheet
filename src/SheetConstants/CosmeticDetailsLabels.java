@@ -1,6 +1,8 @@
 package SheetConstants;
 
-public final class CosmeticDetails {
+import java.io.Serializable;
+
+public final class CosmeticDetailsLabels implements Serializable {
     public static final String CharacterName = "Character Name";
     public static final String Player = "Player";
     public static final String Deity = "Deity";
@@ -12,4 +14,18 @@ public final class CosmeticDetails {
     public static final String Eyes = "Eyes";
     public static final String Languages = "Languages";
 
+    public static String[] ListCosmeticDetails() {
+        return new String[] {
+                CharacterName,
+                Player,
+                Deity,
+                Homeland,
+                Gender,
+                Height,
+                Weight,
+                Hair,
+                Eyes,
+                Languages
+        };
+    }
 }

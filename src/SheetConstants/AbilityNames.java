@@ -1,6 +1,8 @@
 package SheetConstants;
 
-public final class AbilityNames {
+import java.io.Serializable;
+
+public final class AbilityNames implements Serializable {
     public static final String Strength = "Strength";
     public static final String Dexterity = "Dexterity";
     public static final String Constitution = "Constitution";
