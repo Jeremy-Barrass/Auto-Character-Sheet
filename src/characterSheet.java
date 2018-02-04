@@ -35,11 +35,15 @@ public class characterSheet implements Serializable {
 	}
 
 	public void generateGui() {
+        if (!characterName.isEmpty()) { cosmeticDetails.setDetail("Character Name", characterName); }
         gui.run(this.abilityScores, this.cosmeticDetails);
     }
 
     public static void main(String[] args) {
         characterSheet sheet = new characterSheet();
+        if (args.length >= 1) {
+            sheet.setCharacterName(args[0]);
+        }
         sheet.generateGui();
     }
 }
