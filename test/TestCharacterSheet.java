@@ -1,6 +1,8 @@
 import CharacterCosmetics.CosmeticDetails;
 import Gui.Gui;
 import RulesLogic.Abilities;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
@@ -14,25 +16,42 @@ import static org.mockito.Mockito.*;
 @PrepareForTest(characterSheet.class)
 @PowerMockIgnore("javax.management")
 public class TestCharacterSheet {
-	String name = "Manetherin";
-	Gui mockGui = mock(Gui.class);
-	Abilities mockAbilities = mock(Abilities.class);
-	CosmeticDetails mockDetails = mock(CosmeticDetails.class);
-	characterSheet manny = new characterSheet(name, mockGui, mockAbilities, mockDetails);
+    String name;
+    String[] params;
+    Gui mockGui;
+    Abilities mockAbilities;
+    CosmeticDetails mockDetails;
+    characterSheet manny;
+
+    @Before
+    public void setUp() {
+        name = "Manetherin";
+        params = new String[] {name, "Boris", "Yahweh"};
+        mockGui = mock(Gui.class);
+        mockAbilities = mock(Abilities.class);
+        mockDetails = mock(CosmeticDetails.class);
+        manny = new characterSheet(params, mockGui, mockAbilities, mockDetails);
+    }
 
 	@Test
-	public void testGetCharacterName() {
+	public void testCharacterNameGetterAndSetter() {
+		manny.setCharacterName(name);
 		assertEquals(manny.getCharacterName(), name);
 	}
 
 	@Test
-	public void testSetCharacterName() {
-		String newName = "Jonny";
-		manny.setCharacterName(newName);
-		assertEquals(manny.getCharacterName(), newName);
-	}
+    public void testPlayerGetterAndSetter() {
+        manny.setPlayer(name);
+        assertEquals(manny.getPlayer(), name);
+    }
 
-	@Test
+    @Test
+    public void testSetSheetFluff() {
+	    assertEquals(params[0], manny.getCharacterName());
+    }
+
+
+    @Test
 	public void testGenerateGui() {
 		manny.generateGui();
         verify(mockGui, times(1)).run(mockAbilities, mockDetails);
