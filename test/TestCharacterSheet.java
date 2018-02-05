@@ -17,6 +17,8 @@ import static org.mockito.Mockito.*;
 @PowerMockIgnore("javax.management")
 public class TestCharacterSheet {
     String name;
+    String player;
+    String god;
     String[] params;
     Gui mockGui;
     Abilities mockAbilities;
@@ -26,30 +28,17 @@ public class TestCharacterSheet {
     @Before
     public void setUp() {
         name = "Manetherin";
-        params = new String[] {name, "Boris", "Yahweh"};
+        params = new String[] {name, player, god};
         mockGui = mock(Gui.class);
         mockAbilities = mock(Abilities.class);
         mockDetails = mock(CosmeticDetails.class);
         manny = new characterSheet(params, mockGui, mockAbilities, mockDetails);
     }
 
-	@Test
-	public void testCharacterNameGetterAndSetter() {
-		manny.setCharacterName(name);
-		assertEquals(manny.getCharacterName(), name);
-	}
-
-	@Test
-    public void testPlayerGetterAndSetter() {
-        manny.setPlayer(name);
-        assertEquals(manny.getPlayer(), name);
-    }
-
     @Test
-    public void testSetSheetFluff() {
-	    assertEquals(params[0], manny.getCharacterName());
+    public void testConstructor() {
+        verify(mockDetails, times(1)).setConfigDetails(params);
     }
-
 
     @Test
 	public void testGenerateGui() {
