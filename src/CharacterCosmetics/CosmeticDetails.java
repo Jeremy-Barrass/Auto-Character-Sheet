@@ -37,9 +37,7 @@ public class CosmeticDetails extends Observable implements iCosmeticDetails, Ser
 
     public void setConfigDetails(String[] details) {
         ArrayList<String> dConfig = new ArrayList<>();
-        setDetailConfig(details, dConfig);
-        setNamedDetails(dConfig, details);
-        dConfig.clear();
+        setNamedDetails(details);
         setDetailConfig(details, dConfig);
         setUnamedDetails(dConfig);
     }
@@ -52,11 +50,10 @@ public class CosmeticDetails extends Observable implements iCosmeticDetails, Ser
         }
     }
 
-    private void setNamedDetails(ArrayList<String> dConfig, String[] details) {
-        for (String item : dConfig) {
-            if (checkList.contains(item.toLowerCase())) {
-                int x = dConfig.indexOf(item);
-                Details.put(item, dConfig.get(x+1));
+    private void setNamedDetails(String[] details) {
+        for (int x = 0; x < details.length; x++) {
+            if (checkList.contains(details[x].toLowerCase())) {
+                Details.put(details[x], details[x+1]);
                 details[x] = "";
                 details[x+1] = "";
             }
