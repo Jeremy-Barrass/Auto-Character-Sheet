@@ -14,9 +14,9 @@ import java.io.Serializable;
 import java.util.Hashtable;
 
 public class AbilityEditor extends JPanel implements iDisplay, Serializable {
-    private Abilities _abilities;
-    private ActionListener _listener;
-    private Hashtable<String, JTextField> _editMap;
+    private Abilities abilities;
+    private ActionListener listener;
+    private Hashtable<String, JTextField> editMap;
     private JButton saveButton;
     private JGridPanel titleFieldDisplay;
     private JLabel title;
@@ -24,32 +24,32 @@ public class AbilityEditor extends JPanel implements iDisplay, Serializable {
 
     public AbilityEditor(iAbilities abilities) {
         setLayout(new BorderLayout());
-        _abilities = (Abilities) abilities;
-        _editMap = new Hashtable<>();
-        _listener = new AbilityEditorListener();
+        this.abilities = (Abilities) abilities;
+        editMap = new Hashtable<>();
+        listener = new AbilityEditorListener();
     }
 
-    public void Display() {
+    public void display() {
         titleFieldDisplay = new JGridPanel(6,2);
         saveButton = new JButton("Change Abilities");
-        saveButton.addActionListener(_listener);
-        for(String ability : AbilityNames.ListAbilityNames()) {
+        saveButton.addActionListener(listener);
+        for(String ability : AbilityNames.listAbilityNames()) {
             title = new JLabel(ability);
             titleFieldDisplay.add(title);
             field = new JTextField("0", 4);
             titleFieldDisplay.add(field);
-            _editMap.put(ability, field);
+            editMap.put(ability, field);
         }
         add(BorderLayout.CENTER, titleFieldDisplay);
         add(BorderLayout.SOUTH, saveButton);
     }
 
     private void UpdateAbilities() {
-        for (String ability : _editMap.keySet()) {
-            int score = Integer.parseInt(_editMap.get(ability).getText());
-            if (score != _abilities.GetAbilityScore(ability)) {
-                _abilities.SetAbilityScore(ability, score);
-                _abilities.notifyObservers(ability);
+        for (String ability : editMap.keySet()) {
+            int score = Integer.parseInt(editMap.get(ability).getText());
+            if (score != abilities.getAbilityScore(ability)) {
+                abilities.setAbilityScore(ability, score);
+                abilities.notifyObservers(ability);
             }
         }
     }

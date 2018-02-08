@@ -1,6 +1,6 @@
 package interfaces;
 
 public interface iAbilities {
-    int GetAbilityScore(String ability);
-    void SetAbilityScore(String ability, int score);
+    int getAbilityScore(String ability);
+    void setAbilityScore(String ability, int score);
 }

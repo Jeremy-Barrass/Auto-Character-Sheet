@@ -13,28 +13,28 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class AbilitiesDisplay extends JPanel implements iDisplay, Serializable, Observer {
-    private Abilities _abilities;
-    private Hashtable<String, JLabel> _displayMap;
+    private Abilities abilities;
+    private Hashtable<String, JLabel> displayMap;
     private JColumn abilityTitles;
     private JColumn abilityScores;
     private JLabel title;
     private JLabel score;
 
     public AbilitiesDisplay(iAbilities abilities) {
-        _abilities = (Abilities) abilities;
-        _abilities.addObserver(this);
-        _displayMap = new Hashtable<>();
+        this.abilities = (Abilities) abilities;
+        this.abilities.addObserver(this);
+        displayMap = new Hashtable<>();
     }
 
-    public void Display(){
+    public void display(){
         abilityTitles = new JColumn();
         abilityScores = new JColumn();
-        for (String statName : AbilityNames.ListAbilityNames()) {
+        for (String statName : AbilityNames.listAbilityNames()) {
             title = new JLabel(statName);
             abilityTitles.add(title);
-            score = new JLabel(Integer.toString(_abilities.GetAbilityScore(statName)));
+            score = new JLabel(Integer.toString(abilities.getAbilityScore(statName)));
             abilityScores.add(score);
-            _displayMap.put(statName, score);
+            displayMap.put(statName, score);
         }
         add(abilityTitles);
         add(abilityScores);
@@ -43,6 +43,6 @@ public class AbilitiesDisplay extends JPanel implements iDisplay, Serializable, 
     public void update(Observable o, Object arg) {
         Abilities abilities = (Abilities) o;
         String changedAbility = (String) arg;
-        _displayMap.get(changedAbility).setText(Integer.toString(abilities.GetAbilityScore(changedAbility)));
+        displayMap.get(changedAbility).setText(Integer.toString(abilities.getAbilityScore(changedAbility)));
     }
 }

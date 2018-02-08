@@ -12,57 +12,57 @@ import static SheetConstants.AbilityNames.*;
  * Created by jeremy on 29/05/17.
  */
 public class Abilities extends Observable implements iAbilities, Serializable {
-    private int StrengthScore;
-    private int DexterityScore;
-    private int ConstitutionScore;
-    private int IntelligenceScore;
-    private int WisdomScore;
-    private int CharismaScore;
+    private int strengthScore;
+    private int dexterityScore;
+    private int constitutionScore;
+    private int intelligenceScore;
+    private int wisdomScore;
+    private int charismaScore;
 
     private static Hashtable<String, Integer> AbilityMap;
 
-    private void SetAbilities() {
-        AbilityMap.put(Strength, StrengthScore);
-        AbilityMap.put(Dexterity, DexterityScore);
-        AbilityMap.put(Constitution, ConstitutionScore);
-        AbilityMap.put(Intelligence, IntelligenceScore);
-        AbilityMap.put(Wisdom, WisdomScore);
-        AbilityMap.put(Charisma, CharismaScore);
+    private void setAbilities() {
+        AbilityMap.put(Strength, strengthScore);
+        AbilityMap.put(Dexterity, dexterityScore);
+        AbilityMap.put(Constitution, constitutionScore);
+        AbilityMap.put(Intelligence, intelligenceScore);
+        AbilityMap.put(Wisdom, wisdomScore);
+        AbilityMap.put(Charisma, charismaScore);
         this.setChanged();
     }
 
     public Abilities() {
         AbilityMap = new Hashtable<String, Integer>();
-        SetAbilities();
+        setAbilities();
     }
 
-    public int GetAbilityScore(String ability) {
+    public int getAbilityScore(String ability) {
         return AbilityMap.get(ability);
     }
 
-    public void SetAbilityScore(String ability, int score) {
+    public void setAbilityScore(String ability, int score) {
         if (score >= 0) {
             switch (ability) {
                 case Strength:
-                    StrengthScore = score;
+                    strengthScore = score;
                     break;
                 case Dexterity:
-                    DexterityScore = score;
+                    dexterityScore = score;
                     break;
                 case Constitution:
-                    ConstitutionScore = score;
+                    constitutionScore = score;
                     break;
                 case Intelligence:
-                    IntelligenceScore = score;
+                    intelligenceScore = score;
                     break;
                 case Wisdom:
-                    WisdomScore = score;
+                    wisdomScore = score;
                     break;
                 case Charisma:
-                    CharismaScore = score;
+                    charismaScore = score;
             }
         }
-        SetAbilities();
+        setAbilities();
     }
 
 
