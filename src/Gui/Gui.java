@@ -4,10 +4,8 @@ import Gui.Display.AbilitiesDisplay;
 import Gui.Display.CosmeticsDisplay;
 import Gui.Editor.AbilityEditor;
 import Gui.Editor.CosmeticsEditor;
-import interfaces.iAbilities;
-import interfaces.iCosmeticDetails;
-import interfaces.iDisplay;
-import interfaces.iGui;
+import interfaces.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,16 +16,13 @@ import java.util.ArrayList;
 import static java.awt.BorderLayout.*;
 
 public class Gui implements iGui, Serializable {
+    private iMenuBar menu;
+    private iSaveFileProcessor saveProc;
     private ArrayList<iDisplay> components;
     private NewFileListener newListener;
     private LoadFileListener loadListener;
     private SaveFileListener saveListener;
     private JFrame f;
-    private JMenuBar menuBar;
-    private JMenu fileMenu;
-    private JMenuItem newMenuSelector;
-    private JMenuItem loadMenuSelector;
-    private JMenuItem saveMenuSelector;
     private JTabbedPane tabs;
     private JPanel characterSheet;
     private JPanel sheetEditor;
@@ -36,11 +31,20 @@ public class Gui implements iGui, Serializable {
     private AbilityEditor abilityEditor;
     private CosmeticsEditor cosmeticsEditor;
 
-    public Gui() {
+    private ActionListener[] listeners;
+
+    public Gui(iMenuBar menu, iSaveFileProcessor saver) {
+        this.menu = menu;
+        saveProc = saver;
         components = new ArrayList<>();
         newListener = new NewFileListener();
         loadListener = new LoadFileListener();
         saveListener = new SaveFileListener();
+        listeners = new ActionListener[] {
+                newListener,
+                loadListener,
+                saveListener
+        };
     }
 
     private void generateAbilities(iAbilities abilities) {
@@ -81,48 +85,11 @@ public class Gui implements iGui, Serializable {
         tabs.addTab("Edit", sheetEditor);
     }
 
-    private void menuSetUp(JFrame frame) {
-        JMenuItem[] menuItems = new JMenuItem[] {
-                newMenuSelector,
-                loadMenuSelector,
-                saveMenuSelector
-        };
-        ActionListener[] listeners = new ActionListener[] {
-                newListener,
-                loadListener,
-                saveListener
-        };
-        String[] names = new String[] {
-                "New",
-                "Load",
-                "Save"
-        };
-        menuBar = new JMenuBar();
-        fileMenu = new JMenu("File");
-        createMenuItems(menuItems, listeners, names);
-        createFileMenu(fileMenu, menuItems);
-        menuBar.add(fileMenu);
-        frame.setJMenuBar(menuBar);
-    }
-
-    private void createMenuItems(JMenuItem[] items, ActionListener[] listeners, String[] names) {
-        for (int x = 0; x < items.length; x++) {
-            items[x] = new JMenuItem(names[x]);
-            items[x].addActionListener(listeners[x]);
-        }
-    }
-
-    private void createFileMenu(JMenu menu, JMenuItem[] list) {
-        for (Component item : list) {
-            menu.add(item);
-        }
-    }
-
     private void frameSetUp() {
         f = new JFrame("Pathfinder Character Sheet");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         tabSetUp();
-        menuSetUp(f);
+        menu.menuSetUp(f, listeners);
         for (iDisplay component : components) { component.display(); }
         f.getContentPane().add(tabs);
         f.setSize(1200, 800);
@@ -149,7 +116,9 @@ public class Gui implements iGui, Serializable {
 
     private class SaveFileListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-
+            JFileChooser dialogue = new JFileChooser();
+            dialogue.showSaveDialog(f);
+            saveProc.saveFile(dialogue.getSelectedFile());
         }
     }
 }

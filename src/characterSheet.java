@@ -1,5 +1,7 @@
 import CharacterCosmetics.CosmeticDetails;
+import Gui.ActionProcessors.SaveFileProcessor;
 import Gui.Gui;
+import Gui.Menu.MenuBar;
 import RulesLogic.Abilities;
 import SheetConstants.CosmeticDetailsLabels;
 import interfaces.iAbilities;
@@ -29,7 +31,7 @@ public class characterSheet implements Serializable {
     }
 
     public static void main(String[] args) {
-        characterSheet sheet = new characterSheet(args, new Gui(), new Abilities(), new CosmeticDetails());
+        characterSheet sheet = new characterSheet(args, new Gui(new MenuBar(), new SaveFileProcessor()), new Abilities(), new CosmeticDetails());
         sheet.generateGui();
     }
 }
