@@ -94,6 +94,7 @@ public class Gui implements iGui, Serializable {
     public void run(iAbilities abilities, iCosmeticDetails details) {
         generateAbilities(abilities);
         generateDetails(details);
+        saveProc.setSaveModels(abilities, details);
         components = new iDisplay[] {
                 abilitiesDisplay,
                 abilityEditor,
