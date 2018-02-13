@@ -18,7 +18,7 @@ import static java.awt.BorderLayout.*;
 public class Gui implements iGui, Serializable {
     private iMenuBar menu;
     private iSaveFileProcessor saveProc;
-    private ArrayList<iDisplay> components;
+    private iDisplay[] components;
     private NewFileListener newListener;
     private LoadFileListener loadListener;
     private SaveFileListener saveListener;
@@ -36,7 +36,6 @@ public class Gui implements iGui, Serializable {
     public Gui(iMenuBar menu, iSaveFileProcessor saver) {
         this.menu = menu;
         saveProc = saver;
-        components = new ArrayList<>();
         newListener = new NewFileListener();
         loadListener = new LoadFileListener();
         saveListener = new SaveFileListener();
@@ -49,16 +48,12 @@ public class Gui implements iGui, Serializable {
 
     private void generateAbilities(iAbilities abilities) {
         abilitiesDisplay = new AbilitiesDisplay(abilities);
-        components.add(abilitiesDisplay);
         abilityEditor = new AbilityEditor(abilities);
-        components.add(abilityEditor);
     }
 
     private void generateDetails(iCosmeticDetails details) {
         cosmeticsDisplay = new CosmeticsDisplay(details);
-        components.add(cosmeticsDisplay);
         cosmeticsEditor = new CosmeticsEditor(details);
-        components.add(cosmeticsEditor);
     }
 
     private void characterSheetSetUp() {
@@ -99,6 +94,12 @@ public class Gui implements iGui, Serializable {
     public void run(iAbilities abilities, iCosmeticDetails details) {
         generateAbilities(abilities);
         generateDetails(details);
+        components = new iDisplay[] {
+                abilitiesDisplay,
+                abilityEditor,
+                cosmeticsDisplay,
+                cosmeticsEditor
+        };
         frameSetUp();
     }
 

@@ -12,19 +12,23 @@ public class MenuBar extends JMenuBar implements iMenuBar, Serializable {
     private JMenuItem newMenuSelector;
     private JMenuItem loadMenuSelector;
     private JMenuItem saveMenuSelector;
+    private JMenuItem[] menuItems;
+    private String[] names;
 
-
-    public void menuSetUp(JFrame frame, ActionListener[] listeners) {
-        JMenuItem[] menuItems = new JMenuItem[] {
+    public MenuBar() {
+         menuItems = new JMenuItem[] {
                 newMenuSelector,
                 loadMenuSelector,
                 saveMenuSelector
         };
-        String[] names = new String[] {
+         names = new String[] {
                 "New",
                 "Load",
                 "Save"
         };
+    }
+
+    public void menuSetUp(JFrame frame, ActionListener[] listeners) {
         fileMenu = new JMenu("File");
         createMenuItems(menuItems, listeners, names);
         createFileMenu(fileMenu, menuItems);
