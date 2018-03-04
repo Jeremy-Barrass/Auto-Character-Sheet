@@ -54,7 +54,7 @@ public class CosmeticsEditor extends JPanel implements iDisplay, Serializable {
         }
     }
 
-    private class CosmeticsEditorListener implements ActionListener {
+    private class CosmeticsEditorListener implements ActionListener, Serializable {
         public void actionPerformed(ActionEvent event) {
             updateDetails();
         }

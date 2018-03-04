@@ -11,7 +11,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import static java.awt.BorderLayout.*;
 
@@ -33,9 +32,8 @@ public class Gui implements iGui, Serializable {
 
     private ActionListener[] listeners;
 
-    public Gui(iMenuBar menu, iSaveFileProcessor saver) {
+    public Gui(iMenuBar menu) {
         this.menu = menu;
-        saveProc = saver;
         newListener = new NewFileListener();
         loadListener = new LoadFileListener();
         saveListener = new SaveFileListener();
@@ -44,6 +42,10 @@ public class Gui implements iGui, Serializable {
                 loadListener,
                 saveListener
         };
+    }
+
+    public void setSaveFileProcessor(iSaveFileProcessor saver) {
+        saveProc = saver;
     }
 
     private void generateAbilities(iAbilities abilities) {
@@ -104,19 +106,19 @@ public class Gui implements iGui, Serializable {
         frameSetUp();
     }
 
-    private class NewFileListener implements ActionListener {
+    private class NewFileListener implements ActionListener, Serializable {
         public void actionPerformed(ActionEvent e) {
 
         }
     }
 
-    private class LoadFileListener implements ActionListener {
+    private class LoadFileListener implements ActionListener, Serializable {
         public void actionPerformed(ActionEvent e) {
 
         }
     }
 
-    private class SaveFileListener implements ActionListener {
+    private class SaveFileListener implements ActionListener, Serializable {
         public void actionPerformed(ActionEvent e) {
             JFileChooser dialogue = new JFileChooser();
             dialogue.showSaveDialog(f);

@@ -1,4 +1,5 @@
 import CharacterCosmetics.CosmeticDetails;
+import Gui.ActionProcessors.SaveFileProcessor;
 import Gui.Gui;
 import RulesLogic.Abilities;
 import org.junit.After;
@@ -20,6 +21,7 @@ public class TestCharacterSheet {
     String player;
     String god;
     String[] params;
+    SaveFileProcessor mockSaver;
     Gui mockGui;
     Abilities mockAbilities;
     CosmeticDetails mockDetails;
@@ -29,10 +31,11 @@ public class TestCharacterSheet {
     public void setUp() {
         name = "Manetherin";
         params = new String[] {name, player, god};
+        mockSaver = mock(SaveFileProcessor.class);
         mockGui = mock(Gui.class);
         mockAbilities = mock(Abilities.class);
         mockDetails = mock(CosmeticDetails.class);
-        manny = new characterSheet(params, mockGui, mockAbilities, mockDetails);
+        manny = new characterSheet(params, mockSaver, mockGui, mockAbilities, mockDetails);
     }
 
     @Test

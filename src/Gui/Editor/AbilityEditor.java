@@ -54,7 +54,7 @@ public class AbilityEditor extends JPanel implements iDisplay, Serializable {
         }
     }
 
-    private class AbilityEditorListener implements ActionListener {
+    private class AbilityEditorListener implements ActionListener, Serializable {
         public void actionPerformed(ActionEvent event) {
             UpdateAbilities();
         }
