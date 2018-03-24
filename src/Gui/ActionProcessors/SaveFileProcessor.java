@@ -21,10 +21,10 @@ public class SaveFileProcessor implements iSaveFileProcessor, Serializable {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
-                writer.write(detail + " : " + cosmeticDetails.getDetail(detail) + "\n");
+                writer.write(detail + ":" + cosmeticDetails.getDetail(detail) + "\n");
             }
             for (String ability : AbilityNames.listAbilityNames()) {
-                writer.write(ability + " : " + abilities.getAbilityScore(ability) + "\n");
+                writer.write(ability + ":" + abilities.getAbilityScore(ability) + "\n");
             }
             writer.close();
         } catch (IOException exception) {
