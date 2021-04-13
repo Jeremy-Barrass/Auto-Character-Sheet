@@ -5,9 +5,7 @@ import Gui.Menu.MenuBar;
 import RulesLogic.Abilities;
 import interfaces.*;
 
-import java.io.Serializable;
-
-public class characterSheet implements Serializable, iCharacterSheet {
+public class characterSheet implements iCharacterSheet {
 
     private iGui gui;
 	private iAbilities abilityScores;

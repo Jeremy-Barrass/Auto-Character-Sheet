@@ -6,12 +6,11 @@ import interfaces.iCosmeticDetails;
 import interfaces.iDisplay;
 
 import javax.swing.*;
-import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
 
-public class CosmeticsDisplay extends JPanel implements iDisplay, Serializable, Observer {
+public class CosmeticsDisplay extends JPanel implements iDisplay, Observer {
     private CosmeticDetails details;
     private Hashtable<String, JLabel> map;
     private JLabel detailLabel;

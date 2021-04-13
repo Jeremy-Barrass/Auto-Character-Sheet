@@ -10,10 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 import java.util.Hashtable;
 
-public class CosmeticsEditor extends JPanel implements iDisplay, Serializable {
+public class CosmeticsEditor extends JPanel implements iDisplay {
     private CosmeticDetails details;
     private Hashtable<String, JTextArea> map;
     private JGridPanel textPanes;
@@ -54,7 +53,7 @@ public class CosmeticsEditor extends JPanel implements iDisplay, Serializable {
         }
     }
 
-    private class CosmeticsEditorListener implements ActionListener, Serializable {
+    private class CosmeticsEditorListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             updateDetails();
         }

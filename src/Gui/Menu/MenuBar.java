@@ -5,9 +5,8 @@ import interfaces.iMenuBar;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 
-public class MenuBar extends JMenuBar implements iMenuBar, Serializable {
+public class MenuBar extends JMenuBar implements iMenuBar {
     private JMenu fileMenu;
     private JMenuItem newMenuSelector;
     private JMenuItem loadMenuSelector;

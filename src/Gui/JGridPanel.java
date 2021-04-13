@@ -2,9 +2,8 @@ package Gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.Serializable;
 
-public class JGridPanel extends JPanel implements Serializable {
+public class JGridPanel extends JPanel {
     private GridLayout grid;
 
     public JGridPanel(int rows, int cols) {

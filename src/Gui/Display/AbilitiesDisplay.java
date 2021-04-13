@@ -7,12 +7,11 @@ import interfaces.iAbilities;
 import interfaces.iDisplay;
 
 import javax.swing.*;
-import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
 
-public class AbilitiesDisplay extends JPanel implements iDisplay, Serializable, Observer {
+public class AbilitiesDisplay extends JPanel implements iDisplay, Observer {
     private Abilities abilities;
     private Hashtable<String, JLabel> displayMap;
     private JColumn abilityTitles;

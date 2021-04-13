@@ -8,7 +8,7 @@ import interfaces.iSaveFileProcessor;
 
 import java.io.*;
 
-public class SaveFileProcessor implements iSaveFileProcessor, Serializable {
+public class SaveFileProcessor implements iSaveFileProcessor {
     private iAbilities abilities;
     private iCosmeticDetails cosmeticDetails;
 
@@ -18,15 +18,13 @@ public class SaveFileProcessor implements iSaveFileProcessor, Serializable {
     }
 
     public void saveFile(File file) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
                 writer.write(detail + ":" + cosmeticDetails.getDetail(detail) + "\n");
             }
             for (String ability : AbilityNames.listAbilityNames()) {
                 writer.write(ability + ":" + abilities.getAbilityScore(ability) + "\n");
             }
-            writer.close();
         } catch (IOException exception) {
             System.out.println("Could not save character, sorry.");
             exception.printStackTrace();

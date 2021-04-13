@@ -10,11 +10,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 
 import static java.awt.BorderLayout.*;
 
-public class Gui implements iGui, Serializable {
+public class Gui implements iGui {
     private iMenuBar menu;
     private iSaveFileProcessor saveProc;
     private iDisplay[] components;
@@ -106,19 +105,19 @@ public class Gui implements iGui, Serializable {
         frameSetUp();
     }
 
-    private class NewFileListener implements ActionListener, Serializable {
+    private class NewFileListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
         }
     }
 
-    private class LoadFileListener implements ActionListener, Serializable {
+    private class LoadFileListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
         }
     }
 
-    private class SaveFileListener implements ActionListener, Serializable {
+    private class SaveFileListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JFileChooser dialogue = new JFileChooser();
             dialogue.showSaveDialog(f);

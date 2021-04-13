@@ -2,7 +2,6 @@ package RulesLogic;
 
 import interfaces.iAbilities;
 
-import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.Observable;
 
@@ -11,7 +10,7 @@ import static SheetConstants.AbilityNames.*;
 /**
  * Created by jeremy on 29/05/17.
  */
-public class Abilities extends Observable implements iAbilities, Serializable {
+public class Abilities extends Observable implements iAbilities {
     private int strengthScore;
     private int dexterityScore;
     private int constitutionScore;

@@ -3,12 +3,12 @@ package CharacterCosmetics;
 import SheetConstants.CosmeticDetailsLabels;
 import interfaces.iCosmeticDetails;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Observable;
 
-public class CosmeticDetails extends Observable implements iCosmeticDetails, Serializable {
+
+public class CosmeticDetails extends Observable implements iCosmeticDetails {
     private static Hashtable<String, String> Details;
     private static ArrayList<String> checkList;
     private ArrayList<String> labelKeys;

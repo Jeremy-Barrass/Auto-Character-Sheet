@@ -10,10 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 import java.util.Hashtable;
 
-public class AbilityEditor extends JPanel implements iDisplay, Serializable {
+public class AbilityEditor extends JPanel implements iDisplay {
     private Abilities abilities;
     private ActionListener listener;
     private Hashtable<String, JTextField> editMap;
@@ -54,7 +53,7 @@ public class AbilityEditor extends JPanel implements iDisplay, Serializable {
         }
     }
 
-    private class AbilityEditorListener implements ActionListener, Serializable {
+    private class AbilityEditorListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             UpdateAbilities();
         }
