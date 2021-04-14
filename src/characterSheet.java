@@ -13,13 +13,10 @@ public class characterSheet implements iCharacterSheet {
 	private iSaveFileProcessor saveProc;
 
     public characterSheet(String[] config,
-                          iSaveFileProcessor saver,
                           iGui gui,
                           iAbilities abilities,
                           iCosmeticDetails details) {
-        saveProc = saver;
 		this.gui = gui;
-		gui.setSaveFileProcessor(saver);
 		this.abilityScores = abilities;
 		this.cosmeticDetails = details;
 		cosmeticDetails.setConfigDetails(config);
@@ -32,8 +29,7 @@ public class characterSheet implements iCharacterSheet {
 
     public static void main(String[] args) {
         characterSheet sheet = new characterSheet(args,
-                new SaveFileProcessor(),
-                new Gui(new MenuBar()),
+                new Gui(new MenuBar(), new SaveFileProcessor()),
                 new Abilities(),
                 new CosmeticDetails());
         sheet.generateGui();

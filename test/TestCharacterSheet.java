@@ -29,11 +29,10 @@ public class TestCharacterSheet {
     public void setUp() {
         name = "Manetherin";
         params = new String[] {name, player, god};
-        mockSaver = mock(SaveFileProcessor.class);
         mockGui = mock(Gui.class);
         mockAbilities = mock(Abilities.class);
         mockDetails = mock(CosmeticDetails.class);
-        manny = new characterSheet(params, mockSaver, mockGui, mockAbilities, mockDetails);
+        manny = new characterSheet(params, mockGui, mockAbilities, mockDetails);
     }
 
     @Test

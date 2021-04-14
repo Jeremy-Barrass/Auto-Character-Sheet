@@ -35,6 +35,8 @@ public class Abilities extends Observable implements iAbilities {
         setAbilities();
     }
 
+//    public Integer getData(String dataLabel) { return getAbilityScore(dataLabel); }
+
     public int getAbilityScore(String ability) {
         return AbilityMap.get(ability);
     }

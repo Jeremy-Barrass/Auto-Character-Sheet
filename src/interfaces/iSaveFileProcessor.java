@@ -1,8 +1,8 @@
 package interfaces;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public interface iSaveFileProcessor {
-   void setSaveModels(iAbilities abilities, iCosmeticDetails details);
-    void saveFile(File file);
+    void saveFile(File file, ArrayList<Object> modelList);
 }
