@@ -6,7 +6,8 @@ import org.junit.runners.Suite;
         TestCharacterSheet.class,
         TestAbilities.class,
         TestCosmeticDetails.class,
-        TestSaveProcessor.class
+        TestSaveProcessor.class,
+        TestLoadProcessor.class
 })
 
 public class ACSTestSuite { }

@@ -14,7 +14,7 @@ import static org.mockito.Mockito.*;
 
 public class TestSaveProcessor {
     @Test
-    public void testSaveFile_WhenItReceivesAFileAndStateModels_ItCallsTheMethodsOnItsDependencies() {
+    public void testSaveFile_WhenItReceivesAFileAndStateModels_ItCallsTheModelDataGetters() {
         // Arrange
         iAbilities mockAbilities = mock(iAbilities.class);
         iCosmeticDetails mockDetails = mock(iCosmeticDetails.class);
