@@ -17,6 +17,7 @@ import static java.awt.BorderLayout.*;
 public class Gui implements iGui {
     private iMenuBar menu;
     private iSaveFileProcessor saveProc;
+    private iLoadFileProcessor loadProc;
     private iDisplay[] components;
     private NewFileListener newListener;
     private LoadFileListener loadListener;
@@ -33,9 +34,10 @@ public class Gui implements iGui {
     private ActionListener[] listeners;
     private ArrayList<Object> stateModels;
 
-    public Gui(iMenuBar menu, iSaveFileProcessor saveFileProcessor) {
+    public Gui(iMenuBar menu, iSaveFileProcessor saveFileProcessor, iLoadFileProcessor loadFileProcessor) {
         this.menu = menu;
         this.saveProc = saveFileProcessor;
+        this.loadProc = loadFileProcessor;
         stateModels = new ArrayList<Object>();
         newListener = new NewFileListener();
         loadListener = new LoadFileListener();
@@ -114,7 +116,9 @@ public class Gui implements iGui {
 
     private class LoadFileListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-
+            JFileChooser dialogue = new JFileChooser();
+            dialogue.showOpenDialog(f);
+            loadProc.loadFile(dialogue.getSelectedFile(), stateModels);
         }
     }
 

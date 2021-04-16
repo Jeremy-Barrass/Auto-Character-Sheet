@@ -25,10 +25,10 @@ public class CosmeticsDisplay extends JPanel implements iDisplay, Observer {
     public void display() {
         for (String label : CosmeticDetailsLabels.listCosmeticDetails()) {
             detailLabel = new JLabel();
-            detailLabel.setText(label);
+            detailLabel.setText(String.format("| %s:", label));
             add(detailLabel);
             detail = new JLabel();
-            detail.setText(details.getDetail(label));
+            detail.setText(String.format("%s |", details.getDetail(label)));
             add(detail);
             map.put(label, detail);
         }

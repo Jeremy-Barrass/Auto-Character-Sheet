@@ -30,4 +30,22 @@ public class TestSaveProcessor {
         verify(mockAbilities, times(6)).getAbilityScore(anyString());
         verify(mockDetails, times(10)).getDetail(anyString());
     }
+
+    @Test
+    public void testSaveFile_WhenThereIsNoFileName_ItDoesNotRun() {
+        // Arrange
+        iAbilities mockAbilities = mock(iAbilities.class);
+        iCosmeticDetails mockDetails = mock(iCosmeticDetails.class);
+        ArrayList<Object> modelList = new ArrayList<>();
+        modelList.add(mockAbilities);
+        modelList.add(mockDetails);
+        SaveFileProcessor saveProcessor = new SaveFileProcessor();
+
+        // Act
+        saveProcessor.saveFile(new File(""), modelList);
+
+        // Assert
+        verify(mockAbilities, times(0)).getAbilityScore(anyString());
+        verify(mockDetails, times(0)).getDetail(anyString());
+    }
 }
