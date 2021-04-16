@@ -1,8 +1,6 @@
 package SheetConstants;
 
-import java.io.Serializable;
-
-public final class CosmeticDetailsLabels implements Serializable {
+public final class CosmeticDetailsLabels {
     public static final String CharacterName = "Character Name";
     public static final String Player = "Player";
     public static final String Deity = "Deity";

@@ -4,19 +4,24 @@ import Gui.Display.AbilitiesDisplay;
 import Gui.Display.CosmeticsDisplay;
 import Gui.Editor.AbilityEditor;
 import Gui.Editor.CosmeticsEditor;
-import interfaces.iAbilities;
-import interfaces.iCosmeticDetails;
-import interfaces.iDisplay;
-import interfaces.iGui;
+import interfaces.*;
+
 import javax.swing.*;
 import java.awt.*;
-import java.io.Serializable;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import static java.awt.BorderLayout.*;
 
-public class Gui implements iGui, Serializable {
-    private ArrayList<iDisplay> components;
+public class Gui implements iGui {
+    private iMenuBar menu;
+    private iSaveFileProcessor saveProc;
+    private iLoadFileProcessor loadProc;
+    private iDisplay[] components;
+    private NewFileListener newListener;
+    private LoadFileListener loadListener;
+    private SaveFileListener saveListener;
     private JFrame f;
     private JTabbedPane tabs;
     private JPanel characterSheet;
@@ -26,22 +31,32 @@ public class Gui implements iGui, Serializable {
     private AbilityEditor abilityEditor;
     private CosmeticsEditor cosmeticsEditor;
 
-    public Gui() {
-        components = new ArrayList<>();
+    private ActionListener[] listeners;
+    private ArrayList<Object> stateModels;
+
+    public Gui(iMenuBar menu, iSaveFileProcessor saveFileProcessor, iLoadFileProcessor loadFileProcessor) {
+        this.menu = menu;
+        this.saveProc = saveFileProcessor;
+        this.loadProc = loadFileProcessor;
+        stateModels = new ArrayList<Object>();
+        newListener = new NewFileListener();
+        loadListener = new LoadFileListener();
+        saveListener = new SaveFileListener();
+        listeners = new ActionListener[] {
+                newListener,
+                loadListener,
+                saveListener
+        };
     }
 
     private void generateAbilities(iAbilities abilities) {
         abilitiesDisplay = new AbilitiesDisplay(abilities);
-        components.add(abilitiesDisplay);
         abilityEditor = new AbilityEditor(abilities);
-        components.add(abilityEditor);
     }
 
     private void generateDetails(iCosmeticDetails details) {
         cosmeticsDisplay = new CosmeticsDisplay(details);
-        components.add(cosmeticsDisplay);
         cosmeticsEditor = new CosmeticsEditor(details);
-        components.add(cosmeticsEditor);
     }
 
     private void characterSheetSetUp() {
@@ -72,6 +87,7 @@ public class Gui implements iGui, Serializable {
         f = new JFrame("Pathfinder Character Sheet");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         tabSetUp();
+        menu.menuSetUp(f, listeners);
         for (iDisplay component : components) { component.display(); }
         f.getContentPane().add(tabs);
         f.setSize(1200, 800);
@@ -81,6 +97,36 @@ public class Gui implements iGui, Serializable {
     public void run(iAbilities abilities, iCosmeticDetails details) {
         generateAbilities(abilities);
         generateDetails(details);
+        stateModels.add(abilities);
+        stateModels.add(details);
+        components = new iDisplay[] {
+                abilitiesDisplay,
+                abilityEditor,
+                cosmeticsDisplay,
+                cosmeticsEditor
+        };
         frameSetUp();
+    }
+
+    private class NewFileListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private class LoadFileListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser dialogue = new JFileChooser();
+            dialogue.showOpenDialog(f);
+            loadProc.loadFile(dialogue.getSelectedFile(), stateModels);
+        }
+    }
+
+    private class SaveFileListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser dialogue = new JFileChooser();
+            dialogue.showSaveDialog(f);
+            saveProc.saveFile(dialogue.getSelectedFile(), stateModels);
+        }
     }
 }

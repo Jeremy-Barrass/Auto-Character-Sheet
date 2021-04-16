@@ -6,12 +6,11 @@ import interfaces.iCosmeticDetails;
 import interfaces.iDisplay;
 
 import javax.swing.*;
-import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
 
-public class CosmeticsDisplay extends JPanel implements iDisplay, Serializable, Observer {
+public class CosmeticsDisplay extends JPanel implements iDisplay, Observer {
     private CosmeticDetails details;
     private Hashtable<String, JLabel> map;
     private JLabel detailLabel;
@@ -26,10 +25,10 @@ public class CosmeticsDisplay extends JPanel implements iDisplay, Serializable, 
     public void display() {
         for (String label : CosmeticDetailsLabels.listCosmeticDetails()) {
             detailLabel = new JLabel();
-            detailLabel.setText(label);
+            detailLabel.setText(String.format("| %s:", label));
             add(detailLabel);
             detail = new JLabel();
-            detail.setText(details.getDetail(label));
+            detail.setText(String.format("%s |", details.getDetail(label)));
             add(detail);
             map.put(label, detail);
         }
