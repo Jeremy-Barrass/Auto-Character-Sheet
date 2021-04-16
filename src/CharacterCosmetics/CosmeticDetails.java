@@ -24,10 +24,6 @@ public class CosmeticDetails extends Observable implements iCosmeticDetails {
         }
     }
 
-//    public String getData(String dataLabel) {
-//        return  getDetail(dataLabel);
-//    }
-
     public String getDetail(String detail) {
         return Details.get(detail);
     }

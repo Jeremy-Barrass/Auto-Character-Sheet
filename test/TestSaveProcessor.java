@@ -24,7 +24,7 @@ public class TestSaveProcessor {
         SaveFileProcessor saveProcessor = new SaveFileProcessor();
 
         // Act
-        saveProcessor.saveFile(new File("test-file"), modelList);
+        saveProcessor.saveFile(new File("test/testHelpers/test-file.txt"), modelList);
 
         // Assert
         verify(mockAbilities, times(6)).getAbilityScore(anyString());
