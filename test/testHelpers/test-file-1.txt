@@ -1,0 +1,16 @@
+Strength:15
+Dexterity:12
+Constitution:13
+Intelligence:17
+Wisdom:11
+Charisma:9
+Character Name:Tomas
+Player:Jeremy
+Deity:
+Homeland:
+Gender:
+Height:
+Weight:
+Hair:Blue
+Eyes:Red
+Languages:

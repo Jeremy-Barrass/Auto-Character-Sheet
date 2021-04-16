@@ -23,7 +23,7 @@ public class TestLoadProcessor {
         LoadFileProcessor loadProcessor = new LoadFileProcessor();
 
         // Act
-        loadProcessor.loadFile(new File("test-file-1.txt"), stateModelList);
+        loadProcessor.loadFile(new File(String.format("%s/test/testHelpers/test-file-1.txt", System.getProperty("user.dir"))), stateModelList);
 
         // Assert
         verify(mockAbilities, times(6)).setAbilityScore(anyString(), anyInt());
