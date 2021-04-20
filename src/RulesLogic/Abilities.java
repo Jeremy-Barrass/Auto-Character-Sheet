@@ -1,6 +1,7 @@
 package RulesLogic;
 
 import interfaces.iAbilities;
+import interfaces.iSaveMonitor;
 
 import java.util.Hashtable;
 import java.util.Observable;
@@ -10,13 +11,14 @@ import static SheetConstants.AbilityNames.*;
 /**
  * Created by jeremy on 29/05/17.
  */
-public class Abilities extends Observable implements iAbilities {
+public class Abilities extends Observable implements iAbilities, iSaveMonitor {
     private int strengthScore;
     private int dexterityScore;
     private int constitutionScore;
     private int intelligenceScore;
     private int wisdomScore;
     private int charismaScore;
+    private boolean isSaved;
 
     private static Hashtable<String, Integer> AbilityMap;
 
@@ -33,6 +35,15 @@ public class Abilities extends Observable implements iAbilities {
     public Abilities() {
         AbilityMap = new Hashtable<String, Integer>();
         setAbilities();
+        isSaved = false;
+    }
+
+    public boolean getIsSaved() {
+        return isSaved;
+    }
+
+    public void setIsSaved(boolean saved) {
+        this.isSaved = saved;
     }
 
     public int getAbilityScore(String ability) {

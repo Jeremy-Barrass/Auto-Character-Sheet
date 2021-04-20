@@ -1,3 +1,4 @@
+import Exceptions.FileNotSavedException;
 import Gui.ActionProcessors.NewFileProcessor;
 import CharacterCosmetics.CosmeticDetails;
 import RulesLogic.Abilities;
@@ -9,21 +10,51 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class TestNewProcessor {
     @Test
-    public void NewFile_WhenCalled_ItSetsAllModelsToEmpty() {
+    public void CreateNewFile_WhenCalled_ItSetsAllModelsToEmpty() throws FileNotSavedException {
         // Arrange
-        Abilities mockAbilities = mock(Abilities.class);
+        Abilities testAbilities = new Abilities();
+        testAbilities.setIsSaved(true);
         for (String name : AbilityNames.listAbilityNames()) {
-            mockAbilities.setAbilityScore(name, 10);
+            testAbilities.setAbilityScore(name, 10);
         }
 
-        CosmeticDetails mockDetails = mock(CosmeticDetails.class);
+        CosmeticDetails testDetails = new CosmeticDetails();
+        testDetails.setIsSaved(true);
         for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
-            mockDetails.setDetail(detail, "Test detail");
+            testDetails.setDetail(detail, "Test detail");
         }
+
+        ArrayList<Object> modelList = new ArrayList<>();
+        modelList.add(testAbilities);
+        modelList.add(testDetails);
+
+        NewFileProcessor newProc = new NewFileProcessor();
+
+        // Act
+        newProc.CreateNewFile(modelList);
+
+        // Assert
+        for (String name : AbilityNames.listAbilityNames()) {
+            assertEquals(0, testAbilities.getAbilityScore(name));
+        }
+
+        for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
+            assertEquals("", testDetails.getDetail(detail));
+        }
+    }
+
+    @Test
+    public void CreateNewFile_WhenCalled_ItChecksTheModelIsSaved() throws FileNotSavedException{
+        // Arrange
+        Abilities mockAbilities = mock(Abilities.class);
+        CosmeticDetails mockDetails = mock(CosmeticDetails.class);
+
+        when(mockAbilities.getIsSaved()).thenReturn(true);
+        when(mockDetails.getIsSaved()).thenReturn(true);
 
         ArrayList<Object> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
@@ -35,12 +66,25 @@ public class TestNewProcessor {
         newProc.CreateNewFile(modelList);
 
         // Assert
-        for (String name : AbilityNames.listAbilityNames()) {
-            assertEquals(0, mockAbilities.getAbilityScore(name));
-        }
+        verify(mockAbilities, times(1)).getIsSaved();
+        verify(mockDetails, times(1)).getIsSaved();
+    }
 
-        for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
-            assertEquals("", mockDetails.getDetail(detail));
-        }
+    @Test(expected = FileNotSavedException.class)
+    public void CreateNewFile_IfAModelIsNotSaved_ItThrowsAFileNotSavedException() throws FileNotSavedException{
+        // Arrange
+        Abilities mockAbilities = mock(Abilities.class);
+        CosmeticDetails mockDetails = mock(CosmeticDetails.class);
+
+        when(mockAbilities.getIsSaved()).thenReturn(true);        when(mockDetails.getIsSaved()).thenReturn(false);
+
+        ArrayList<Object> modelList = new ArrayList<>();
+        modelList.add(mockAbilities);
+        modelList.add(mockDetails);
+
+        NewFileProcessor newProc = new NewFileProcessor();
+
+        // Act
+        newProc.CreateNewFile(modelList);
     }
 }
