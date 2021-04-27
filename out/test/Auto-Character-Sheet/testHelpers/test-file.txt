@@ -1,0 +1,16 @@
+Strength:0
+Dexterity:0
+Constitution:0
+Intelligence:0
+Wisdom:0
+Charisma:0
+Character Name:null
+Player:null
+Deity:null
+Homeland:null
+Gender:null
+Height:null
+Weight:null
+Hair:null
+Eyes:null
+Languages:null

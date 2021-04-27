@@ -4,7 +4,6 @@ import CharacterCosmetics.CosmeticDetails;
 import RulesLogic.Abilities;
 import SheetConstants.AbilityNames;
 import SheetConstants.CosmeticDetailsLabels;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;

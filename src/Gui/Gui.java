@@ -1,5 +1,6 @@
 package Gui;
 
+import Exceptions.FileNotSavedException;
 import Gui.Display.AbilitiesDisplay;
 import Gui.Display.CosmeticsDisplay;
 import Gui.Editor.AbilityEditor;
@@ -18,6 +19,7 @@ public class Gui implements iGui {
     private iMenuBar menu;
     private iSaveFileProcessor saveProc;
     private iLoadFileProcessor loadProc;
+    private iNewFileProcessor newProc;
     private iDisplay[] components;
     private NewFileListener newListener;
     private LoadFileListener loadListener;
@@ -34,10 +36,11 @@ public class Gui implements iGui {
     private ActionListener[] listeners;
     private ArrayList<Object> stateModels;
 
-    public Gui(iMenuBar menu, iSaveFileProcessor saveFileProcessor, iLoadFileProcessor loadFileProcessor) {
+    public Gui(iMenuBar menu, iSaveFileProcessor saveFileProcessor, iLoadFileProcessor loadFileProcessor, iNewFileProcessor newFileProcessor) {
         this.menu = menu;
         this.saveProc = saveFileProcessor;
         this.loadProc = loadFileProcessor;
+        this.newProc = newFileProcessor;
         stateModels = new ArrayList<Object>();
         newListener = new NewFileListener();
         loadListener = new LoadFileListener();
@@ -94,6 +97,36 @@ public class Gui implements iGui {
         f.setVisible(true);
     }
 
+    private void showFileNotSavedDialogue(ArrayList<Object> stateModels) {
+        int option = JOptionPane.showConfirmDialog(f,
+                "This Character Sheet has not been saved!\n" +
+                "Do you want to save this Character?",
+                "Character not saved!",
+                JOptionPane.YES_NO_OPTION);
+        if (option < 1) {
+            displaySaveFileMenu();
+        } else {
+            for (Object model : stateModels) {
+                ((iSaveMonitor) model).setIsSaved(true);
+            }
+            displayNewFile();
+        }
+    }
+
+    private void displaySaveFileMenu() {
+        JFileChooser dialogue = new JFileChooser();
+        dialogue.showSaveDialog(f);
+        saveProc.saveFile(dialogue.getSelectedFile(), stateModels);
+    }
+
+    private void displayNewFile() {
+        try {
+            newProc.CreateNewFile(stateModels);
+        } catch (FileNotSavedException e) {
+            showFileNotSavedDialogue(stateModels);
+        }
+    }
+
     public void run(iAbilities abilities, iCosmeticDetails details) {
         generateAbilities(abilities);
         generateDetails(details);
@@ -110,7 +143,7 @@ public class Gui implements iGui {
 
     private class NewFileListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-
+            displayNewFile();
         }
     }
 
@@ -124,9 +157,7 @@ public class Gui implements iGui {
 
     private class SaveFileListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            JFileChooser dialogue = new JFileChooser();
-            dialogue.showSaveDialog(f);
-            saveProc.saveFile(dialogue.getSelectedFile(), stateModels);
+            displaySaveFileMenu();
         }
     }
 }

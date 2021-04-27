@@ -21,6 +21,7 @@ public class NewFileProcessor implements iNewFileProcessor {
                 }
                 for (String name : AbilityNames.listAbilityNames()) {
                     abilities.setAbilityScore(name, 0);
+                    abilities.notifyObservers(name);
                 }
             } else if (model instanceof iCosmeticDetails) {
                 CosmeticDetails details = (CosmeticDetails) model;
@@ -29,6 +30,7 @@ public class NewFileProcessor implements iNewFileProcessor {
                 }
                 for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
                     details.setDetail(detail, "");
+                    details.notifyObservers(detail);
                 }
             }
         }
