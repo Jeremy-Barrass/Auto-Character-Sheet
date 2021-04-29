@@ -1,5 +1,6 @@
 import CharacterCosmetics.CosmeticDetails;
 import Gui.ActionProcessors.LoadFileProcessor;
+import Gui.ActionProcessors.NewFileProcessor;
 import Gui.ActionProcessors.SaveFileProcessor;
 import Gui.Gui;
 import Gui.Menu.MenuBar;
@@ -30,7 +31,12 @@ public class characterSheet implements iCharacterSheet {
 
     public static void main(String[] args) {
         characterSheet sheet = new characterSheet(args,
-                new Gui(new MenuBar(), new SaveFileProcessor(), new LoadFileProcessor()),
+                new Gui(
+                        new MenuBar(),
+                        new SaveFileProcessor(),
+                        new LoadFileProcessor(),
+                        new NewFileProcessor()
+                ),
                 new Abilities(),
                 new CosmeticDetails());
         sheet.generateGui();
