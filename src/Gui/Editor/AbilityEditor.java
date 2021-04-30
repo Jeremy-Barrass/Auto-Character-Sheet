@@ -11,9 +11,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
+import java.util.Observable;
 import java.util.Observer;
 
-public class AbilityEditor extends JPanel implements iDisplay {
+public class AbilityEditor extends JPanel implements iDisplay, Observer {
     private Abilities abilities;
     private ActionListener listener;
     private Hashtable<String, JTextField> editMap;
@@ -25,6 +26,7 @@ public class AbilityEditor extends JPanel implements iDisplay {
     public AbilityEditor(iAbilities abilities) {
         setLayout(new BorderLayout());
         this.abilities = (Abilities) abilities;
+        this.abilities.addObserver(this);
         editMap = new Hashtable<>();
         listener = new AbilityEditorListener();
     }
@@ -53,6 +55,12 @@ public class AbilityEditor extends JPanel implements iDisplay {
                 abilities.notifyObservers(ability);
             }
         }
+    }
+
+    public void update(Observable observable, Object o) {
+        Abilities abilities = (Abilities) observable;
+        String changedAbility = (String) o;
+        editMap.get(changedAbility).setText(Integer.toString(abilities.getAbilityScore(changedAbility)));
     }
 
     private class AbilityEditorListener implements ActionListener {
