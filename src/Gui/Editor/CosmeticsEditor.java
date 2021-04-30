@@ -11,8 +11,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
+import java.util.Observable;
+import java.util.Observer;
 
-public class CosmeticsEditor extends JPanel implements iDisplay {
+public class CosmeticsEditor extends JPanel implements iDisplay, Observer {
     private CosmeticDetails details;
     private Hashtable<String, JTextArea> map;
     private JGridPanel textPanes;
@@ -23,6 +25,7 @@ public class CosmeticsEditor extends JPanel implements iDisplay {
 
     public CosmeticsEditor(iCosmeticDetails details) {
         this.details = (CosmeticDetails) details;
+        this.details.addObserver(this);
         listener = new CosmeticsEditorListener();
         map = new Hashtable<>();
         setLayout(new BorderLayout());
@@ -52,6 +55,12 @@ public class CosmeticsEditor extends JPanel implements iDisplay {
                 details.notifyObservers(detail);
             }
         }
+    }
+
+    public void update(Observable observable, Object o) {
+        CosmeticDetails observableDetails = (CosmeticDetails) observable;
+        String changedDetail = (String) o;
+        map.get(changedDetail).setText(observableDetails.getDetail(changedDetail));
     }
 
     private class CosmeticsEditorListener implements ActionListener {
