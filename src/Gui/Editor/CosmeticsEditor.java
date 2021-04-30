@@ -48,6 +48,7 @@ public class CosmeticsEditor extends JPanel implements iDisplay {
             String detailText = map.get(detail).getText();
             if (!detailText.isEmpty() && !detailText.matches(details.getDetail(detail))) {
                 details.setDetail(detail, detailText);
+                details.setIsSaved(false);
                 details.notifyObservers(detail);
             }
         }

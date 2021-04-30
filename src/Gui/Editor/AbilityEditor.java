@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.Hashtable;
 import java.util.Observer;
 
-public class AbilityEditor extends JPanel implements iDisplay, Observer {
+public class AbilityEditor extends JPanel implements iDisplay {
     private Abilities abilities;
     private ActionListener listener;
     private Hashtable<String, JTextField> editMap;
@@ -49,6 +49,7 @@ public class AbilityEditor extends JPanel implements iDisplay, Observer {
             int score = Integer.parseInt(editMap.get(ability).getText());
             if (score != abilities.getAbilityScore(ability)) {
                 abilities.setAbilityScore(ability, score);
+                abilities.setIsSaved(false);
                 abilities.notifyObservers(ability);
             }
         }
