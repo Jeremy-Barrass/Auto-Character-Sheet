@@ -5,6 +5,7 @@ import SheetConstants.CosmeticDetailsLabels;
 import interfaces.iAbilities;
 import interfaces.iCosmeticDetails;
 import interfaces.iSaveFileProcessor;
+import interfaces.iSaveMonitor;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -18,10 +19,12 @@ public class SaveFileProcessor<T> implements iSaveFileProcessor {
                         for (String ability : AbilityNames.listAbilityNames()) {
                             writer.write(ability + ":" + ((iAbilities) model).getAbilityScore(ability) + "\n");
                         }
+                        ((iSaveMonitor) model).setIsSaved(true);
                     } else if (model instanceof iCosmeticDetails) {
                         for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
                             writer.write(detail + ":" + ((iCosmeticDetails) model).getDetail(detail) + "\n");
                         }
+                        ((iSaveMonitor) model).setIsSaved(true);
                     }
                 }
             } catch (IOException exception) {

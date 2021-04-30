@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import static java.awt.BorderLayout.*;
@@ -35,6 +36,8 @@ public class Gui implements iGui {
 
     private ActionListener[] listeners;
     private ArrayList<Object> stateModels;
+
+    private File fileToLoad;
 
     public Gui(iMenuBar menu, iSaveFileProcessor saveFileProcessor, iLoadFileProcessor loadFileProcessor, iNewFileProcessor newFileProcessor) {
         this.menu = menu;
@@ -97,7 +100,7 @@ public class Gui implements iGui {
         f.setVisible(true);
     }
 
-    private void showFileNotSavedDialogue(ArrayList<Object> stateModels) {
+    private void showFileNotSavedDialogue(ArrayList<Object> stateModels, boolean isLoading) {
         int option = JOptionPane.showConfirmDialog(f,
                 "This Character Sheet has not been saved!\n" +
                 "Do you want to save this Character?",
@@ -109,7 +112,20 @@ public class Gui implements iGui {
             for (Object model : stateModels) {
                 ((iSaveMonitor) model).setIsSaved(true);
             }
-            displayNewFile();
+            if (isLoading) {
+                loadFile(fileToLoad);
+            } else {
+                displayNewFile();
+            }
+        }
+    }
+
+    private void loadFile(File file) {
+        try{
+            loadProc.loadFile(file, stateModels);
+        } catch (FileNotSavedException e) {
+            fileToLoad = file;
+            showFileNotSavedDialogue(stateModels, true);
         }
     }
 
@@ -123,7 +139,7 @@ public class Gui implements iGui {
         try {
             newProc.CreateNewFile(stateModels);
         } catch (FileNotSavedException e) {
-            showFileNotSavedDialogue(stateModels);
+            showFileNotSavedDialogue(stateModels, false);
         }
     }
 
@@ -151,7 +167,7 @@ public class Gui implements iGui {
         public void actionPerformed(ActionEvent e) {
             JFileChooser dialogue = new JFileChooser();
             dialogue.showOpenDialog(f);
-            loadProc.loadFile(dialogue.getSelectedFile(), stateModels);
+            loadFile(dialogue.getSelectedFile());
         }
     }
 

@@ -1,6 +1,7 @@
 package Gui.ActionProcessors;
 
 import CharacterCosmetics.CosmeticDetails;
+import Exceptions.FileNotSavedException;
 import SheetConstants.AbilityNames;
 import SheetConstants.CosmeticDetailsLabels;
 import interfaces.iAbilities;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class LoadFileProcessor implements iLoadFileProcessor {
-    public void loadFile(File file, ArrayList<Object> stateModelList) {
+    public void loadFile(File file, ArrayList<Object> stateModelList) throws FileNotSavedException {
         if (!file.getName().isEmpty() && file.getName() != null) {
             try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line = null;
@@ -26,18 +27,30 @@ public class LoadFileProcessor implements iLoadFileProcessor {
                     String value = keyValuePair.length > 1 ? keyValuePair[1] : "";
                     for (Object model : stateModelList) {
                         if (model instanceof iAbilities && contains(AbilityNames.listAbilityNames(), key)) {
-                            ((iAbilities) model).setAbilityScore(key, Integer.parseInt(value));
-                            ((Abilities) model).notifyObservers(key);
+                            Abilities abilities = (Abilities) model;
+                            if (!abilities.getIsSaved()) {
+                                throw new FileNotSavedException();
+                            }
+                            abilities.setAbilityScore(key, Integer.parseInt(value));
+                            abilities.notifyObservers(key);
                         } else if (model instanceof iCosmeticDetails
                                 && contains(CosmeticDetailsLabels.listCosmeticDetails(), key)) {
-                            ((iCosmeticDetails) model).setDetail(key, value);
-                            ((CosmeticDetails) model).notifyObservers(key);
+                            CosmeticDetails details = (CosmeticDetails) model;
+                            if (!details.getIsSaved()) {
+                                throw new FileNotSavedException();
+                            }
+                            details.setDetail(key, value);
+                            details.notifyObservers(key);
                         }
                     }
                 }
             } catch (Exception exception) {
-                System.out.println("Could not load character, sorry.");
-                exception.printStackTrace();
+                if (exception instanceof FileNotSavedException) {
+                    throw ((FileNotSavedException) exception);
+                } else {
+                    System.out.println("Could not load character, sorry.");
+                    exception.printStackTrace();
+                }
             }
 
         }

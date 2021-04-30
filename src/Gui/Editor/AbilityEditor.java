@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
+import java.util.Observer;
 
 public class AbilityEditor extends JPanel implements iDisplay {
     private Abilities abilities;
@@ -48,6 +49,7 @@ public class AbilityEditor extends JPanel implements iDisplay {
             int score = Integer.parseInt(editMap.get(ability).getText());
             if (score != abilities.getAbilityScore(ability)) {
                 abilities.setAbilityScore(ability, score);
+                abilities.setIsSaved(false);
                 abilities.notifyObservers(ability);
             }
         }
