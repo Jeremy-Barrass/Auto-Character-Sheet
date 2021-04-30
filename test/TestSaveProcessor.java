@@ -1,4 +1,6 @@
+import CharacterCosmetics.CosmeticDetails;
 import Gui.ActionProcessors.SaveFileProcessor;
+import RulesLogic.Abilities;
 import interfaces.*;
 import interfaces.iCosmeticDetails;
 import org.junit.Test;
@@ -14,10 +16,10 @@ import static org.mockito.Mockito.*;
 
 public class TestSaveProcessor {
     @Test
-    public void testSaveFile_WhenItReceivesAFileAndStateModels_ItCallsTheModelDataGetters() {
+    public void saveFile_WhenItReceivesAFileAndStateModels_ItCallsTheModelDataGetters() {
         // Arrange
-        iAbilities mockAbilities = mock(iAbilities.class);
-        iCosmeticDetails mockDetails = mock(iCosmeticDetails.class);
+        Abilities mockAbilities = mock(Abilities.class);
+        CosmeticDetails mockDetails = mock(CosmeticDetails.class);
         ArrayList<Object> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
         modelList.add(mockDetails);
@@ -32,7 +34,26 @@ public class TestSaveProcessor {
     }
 
     @Test
-    public void testSaveFile_WhenThereIsNoFileName_ItDoesNotRun() {
+    public void saveFile_WhenItSavesAFile_ItSetsTheModelsToIsSaved() {
+        // Arrange
+        Abilities mockAbilities = mock(Abilities.class);
+        CosmeticDetails mockDetails = mock(CosmeticDetails.class);
+        ArrayList<Object> modelList = new ArrayList<>();
+        modelList.add(mockAbilities);
+        modelList.add(mockDetails);
+        SaveFileProcessor saveProcessor = new SaveFileProcessor();
+
+        // Act
+        saveProcessor.saveFile(new File("test/testHelpers/test-file.txt"), modelList);
+
+        // Assert
+        verify(mockAbilities, times(1)).setIsSaved(true);
+        verify(mockDetails, times(1)).setIsSaved(true);
+
+    }
+
+    @Test
+    public void saveFile_WhenThereIsNoFileName_ItDoesNotRun() {
         // Arrange
         iAbilities mockAbilities = mock(iAbilities.class);
         iCosmeticDetails mockDetails = mock(iCosmeticDetails.class);

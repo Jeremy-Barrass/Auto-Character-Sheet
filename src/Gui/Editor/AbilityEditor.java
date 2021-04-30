@@ -11,8 +11,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
+import java.util.Observer;
 
-public class AbilityEditor extends JPanel implements iDisplay {
+public class AbilityEditor extends JPanel implements iDisplay, Observer {
     private Abilities abilities;
     private ActionListener listener;
     private Hashtable<String, JTextField> editMap;
