@@ -41,18 +41,33 @@ public class Gui implements iGui {
 
     public Gui(iMenuBar menu, iSaveFileProcessor saveFileProcessor, iLoadFileProcessor loadFileProcessor, iNewFileProcessor newFileProcessor) {
         this.menu = menu;
+        stateModels = new ArrayList<Object>();
+
         this.saveProc = saveFileProcessor;
         this.loadProc = loadFileProcessor;
         this.newProc = newFileProcessor;
-        stateModels = new ArrayList<Object>();
-        newListener = new NewFileListener();
-        loadListener = new LoadFileListener();
         saveListener = new SaveFileListener();
+        loadListener = new LoadFileListener();
+        newListener = new NewFileListener();
         listeners = new ActionListener[] {
-                newListener,
+                saveListener,
                 loadListener,
-                saveListener
+                newListener
         };
+    }
+
+    public void run(iAbilities abilities, iCosmeticDetails details) {
+        generateAbilities(abilities);
+        generateDetails(details);
+        stateModels.add(abilities);
+        stateModels.add(details);
+        components = new iDisplay[] {
+                abilitiesDisplay,
+                abilityEditor,
+                cosmeticsDisplay,
+                cosmeticsEditor
+        };
+        frameSetUp();
     }
 
     private void generateAbilities(iAbilities abilities) {
@@ -63,6 +78,25 @@ public class Gui implements iGui {
     private void generateDetails(iCosmeticDetails details) {
         cosmeticsDisplay = new CosmeticsDisplay(details);
         cosmeticsEditor = new CosmeticsEditor(details);
+    }
+
+    private void frameSetUp() {
+        f = new JFrame("Pathfinder Character Sheet");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        tabSetUp();
+        menu.menuSetUp(f, listeners);
+        for (iDisplay component : components) { component.display(); }
+        f.getContentPane().add(tabs);
+        f.setSize(1200, 800);
+        f.setVisible(true);
+    }
+
+    private void tabSetUp() {
+        tabs = new JTabbedPane();
+        characterSheetSetUp();
+        sheetEditorSetUp();
+        tabs.addTab("Character Sheet", characterSheet);
+        tabs.addTab("Edit", sheetEditor);
     }
 
     private void characterSheetSetUp() {
@@ -81,23 +115,33 @@ public class Gui implements iGui {
         sheetEditor.add(WEST, westPanel);
     }
 
-    private void tabSetUp() {
-        tabs = new JTabbedPane();
-        characterSheetSetUp();
-        sheetEditorSetUp();
-        tabs.addTab("Character Sheet", characterSheet);
-        tabs.addTab("Edit", sheetEditor);
+    private class SaveFileListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            displaySaveFileMenu();
+        }
     }
 
-    private void frameSetUp() {
-        f = new JFrame("Pathfinder Character Sheet");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        tabSetUp();
-        menu.menuSetUp(f, listeners);
-        for (iDisplay component : components) { component.display(); }
-        f.getContentPane().add(tabs);
-        f.setSize(1200, 800);
-        f.setVisible(true);
+    private void displaySaveFileMenu() {
+        JFileChooser dialogue = new JFileChooser();
+        dialogue.showSaveDialog(f);
+        saveProc.saveFile(dialogue.getSelectedFile(), stateModels);
+    }
+
+    private class LoadFileListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser dialogue = new JFileChooser();
+            dialogue.showOpenDialog(f);
+            loadFile(dialogue.getSelectedFile());
+        }
+    }
+
+    private void loadFile(File file) {
+        try{
+            loadProc.loadFile(file, stateModels);
+        } catch (FileNotSavedException e) {
+            fileToLoad = file;
+            showFileNotSavedDialogue(stateModels, true);
+        }
     }
 
     private void showFileNotSavedDialogue(ArrayList<Object> stateModels, boolean isLoading) {
@@ -120,19 +164,10 @@ public class Gui implements iGui {
         }
     }
 
-    private void loadFile(File file) {
-        try{
-            loadProc.loadFile(file, stateModels);
-        } catch (FileNotSavedException e) {
-            fileToLoad = file;
-            showFileNotSavedDialogue(stateModels, true);
+    private class NewFileListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            displayNewFile();
         }
-    }
-
-    private void displaySaveFileMenu() {
-        JFileChooser dialogue = new JFileChooser();
-        dialogue.showSaveDialog(f);
-        saveProc.saveFile(dialogue.getSelectedFile(), stateModels);
     }
 
     private void displayNewFile() {
@@ -140,40 +175,6 @@ public class Gui implements iGui {
             newProc.CreateNewFile(stateModels);
         } catch (FileNotSavedException e) {
             showFileNotSavedDialogue(stateModels, false);
-        }
-    }
-
-    public void run(iAbilities abilities, iCosmeticDetails details) {
-        generateAbilities(abilities);
-        generateDetails(details);
-        stateModels.add(abilities);
-        stateModels.add(details);
-        components = new iDisplay[] {
-                abilitiesDisplay,
-                abilityEditor,
-                cosmeticsDisplay,
-                cosmeticsEditor
-        };
-        frameSetUp();
-    }
-
-    private class NewFileListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            displayNewFile();
-        }
-    }
-
-    private class LoadFileListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            JFileChooser dialogue = new JFileChooser();
-            dialogue.showOpenDialog(f);
-            loadFile(dialogue.getSelectedFile());
-        }
-    }
-
-    private class SaveFileListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            displaySaveFileMenu();
         }
     }
 }
