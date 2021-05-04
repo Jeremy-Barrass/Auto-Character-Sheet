@@ -5,6 +5,7 @@ import Gui.Display.AbilitiesDisplay;
 import Gui.Display.CosmeticsDisplay;
 import Gui.Editor.AbilityEditor;
 import Gui.Editor.CosmeticsEditor;
+import Models.Model;
 import interfaces.*;
 
 import javax.swing.*;
@@ -56,7 +57,7 @@ public class Gui implements iGui {
         };
     }
 
-    public void run(iAbilities abilities, iCosmeticDetails details) {
+    public void run(Model abilities, iCosmeticDetails details) {
         generateAbilities(abilities);
         generateDetails(details);
         stateModels.add(abilities);
@@ -70,7 +71,7 @@ public class Gui implements iGui {
         frameSetUp();
     }
 
-    private void generateAbilities(iAbilities abilities) {
+    private void generateAbilities(Model abilities) {
         abilitiesDisplay = new AbilitiesDisplay(abilities);
         abilityEditor = new AbilityEditor(abilities);
     }

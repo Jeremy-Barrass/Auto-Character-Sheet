@@ -2,8 +2,6 @@ import CharacterCosmetics.CosmeticDetails;
 import Exceptions.FileNotSavedException;
 import Gui.ActionProcessors.LoadFileProcessor;
 import RulesLogic.Abilities;
-import interfaces.iAbilities;
-import interfaces.iCosmeticDetails;
 import org.junit.Test;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 
@@ -33,7 +31,7 @@ public class TestLoadProcessor {
         loadProcessor.loadFile(new File(String.format("%s/test/testHelpers/test-file-1.txt", System.getProperty("user.dir"))), stateModelList);
 
         // Assert
-        verify(mockAbilities, times(6)).setAbilityScore(anyString(), anyInt());
+        verify(mockAbilities, times(6)).setData(anyString(), anyInt());
         verify(mockDetails, times(10)).setDetail(anyString(), anyString());
     }
 
@@ -55,7 +53,7 @@ public class TestLoadProcessor {
         loadProcessor.loadFile(new File(""), stateModelList);
 
         // Assert
-        verify(mockAbilities, times(0)).setAbilityScore(anyString(), anyInt());
+        verify(mockAbilities, times(0)).setData(anyString(), anyInt());
         verify(mockDetails, times(0)).setDetail(anyString(), anyString());
     }
 

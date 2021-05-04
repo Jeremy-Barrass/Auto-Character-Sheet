@@ -1,9 +1,9 @@
 package Gui.Display;
 
 import Gui.JColumn;
+import Models.Model;
 import RulesLogic.Abilities;
 import SheetConstants.AbilityNames;
-import interfaces.iAbilities;
 import interfaces.iDisplay;
 
 import javax.swing.*;
@@ -19,7 +19,7 @@ public class AbilitiesDisplay extends JPanel implements iDisplay, Observer {
     private JLabel title;
     private JLabel score;
 
-    public AbilitiesDisplay(iAbilities abilities) {
+    public AbilitiesDisplay(Model abilities) {
         this.abilities = (Abilities) abilities;
         this.abilities.addObserver(this);
         displayMap = new Hashtable<>();
@@ -31,7 +31,7 @@ public class AbilitiesDisplay extends JPanel implements iDisplay, Observer {
         for (String statName : AbilityNames.listAbilityNames()) {
             title = new JLabel(statName);
             abilityTitles.add(title);
-            score = new JLabel(Integer.toString(abilities.getAbilityScore(statName)));
+            score = new JLabel(Integer.toString(abilities.getData(statName)));
             abilityScores.add(score);
             displayMap.put(statName, score);
         }
@@ -42,6 +42,6 @@ public class AbilitiesDisplay extends JPanel implements iDisplay, Observer {
     public void update(Observable o, Object arg) {
         Abilities abilities = (Abilities) o;
         String changedAbility = (String) arg;
-        displayMap.get(changedAbility).setText(Integer.toString(abilities.getAbilityScore(changedAbility)));
+        displayMap.get(changedAbility).setText(Integer.toString(abilities.getData(changedAbility)));
     }
 }

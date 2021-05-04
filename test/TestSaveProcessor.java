@@ -1,5 +1,6 @@
 import CharacterCosmetics.CosmeticDetails;
 import Gui.ActionProcessors.SaveFileProcessor;
+import Models.Model;
 import RulesLogic.Abilities;
 import interfaces.*;
 import interfaces.iCosmeticDetails;
@@ -18,7 +19,7 @@ public class TestSaveProcessor {
     @Test
     public void saveFile_WhenItReceivesAFileAndStateModels_ItCallsTheModelDataGetters() {
         // Arrange
-        Abilities mockAbilities = mock(Abilities.class);
+        Model mockAbilities = mock(Model.class);
         CosmeticDetails mockDetails = mock(CosmeticDetails.class);
         ArrayList<Object> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
@@ -29,14 +30,14 @@ public class TestSaveProcessor {
         saveProcessor.saveFile(new File("test/testHelpers/test-file.txt"), modelList);
 
         // Assert
-        verify(mockAbilities, times(6)).getAbilityScore(anyString());
+        verify(mockAbilities, times(6)).getData(anyString());
         verify(mockDetails, times(10)).getDetail(anyString());
     }
 
     @Test
     public void saveFile_WhenItSavesAFile_ItSetsTheModelsToIsSaved() {
         // Arrange
-        Abilities mockAbilities = mock(Abilities.class);
+        Model mockAbilities = mock(Model.class);
         CosmeticDetails mockDetails = mock(CosmeticDetails.class);
         ArrayList<Object> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
@@ -55,7 +56,7 @@ public class TestSaveProcessor {
     @Test
     public void saveFile_WhenThereIsNoFileName_ItDoesNotRun() {
         // Arrange
-        iAbilities mockAbilities = mock(iAbilities.class);
+        Model mockAbilities = mock(Model.class);
         iCosmeticDetails mockDetails = mock(iCosmeticDetails.class);
         ArrayList<Object> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
@@ -66,7 +67,7 @@ public class TestSaveProcessor {
         saveProcessor.saveFile(new File(""), modelList);
 
         // Assert
-        verify(mockAbilities, times(0)).getAbilityScore(anyString());
+        verify(mockAbilities, times(0)).getData(anyString());
         verify(mockDetails, times(0)).getDetail(anyString());
     }
 }

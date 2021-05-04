@@ -1,9 +1,9 @@
 package Gui.Editor;
 
 import Gui.JGridPanel;
+import Models.Model;
 import RulesLogic.Abilities;
 import SheetConstants.AbilityNames;
-import interfaces.iAbilities;
 import interfaces.iDisplay;
 
 import javax.swing.*;
@@ -23,7 +23,7 @@ public class AbilityEditor extends JPanel implements iDisplay, Observer {
     private JLabel title;
     private JTextField field;
 
-    public AbilityEditor(iAbilities abilities) {
+    public AbilityEditor(Model abilities) {
         setLayout(new BorderLayout());
         this.abilities = (Abilities) abilities;
         this.abilities.addObserver(this);
@@ -49,8 +49,8 @@ public class AbilityEditor extends JPanel implements iDisplay, Observer {
     private void UpdateAbilities() {
         for (String ability : editMap.keySet()) {
             int score = Integer.parseInt(editMap.get(ability).getText());
-            if (score != abilities.getAbilityScore(ability)) {
-                abilities.setAbilityScore(ability, score);
+            if (score != abilities.getData(ability)) {
+                abilities.setData(ability, score);
                 abilities.setIsSaved(false);
                 abilities.notifyObservers(ability);
             }
@@ -60,7 +60,7 @@ public class AbilityEditor extends JPanel implements iDisplay, Observer {
     public void update(Observable observable, Object o) {
         Abilities abilities = (Abilities) observable;
         String changedAbility = (String) o;
-        editMap.get(changedAbility).setText(Integer.toString(abilities.getAbilityScore(changedAbility)));
+        editMap.get(changedAbility).setText(Integer.toString(abilities.getData(changedAbility)));
     }
 
     private class AbilityEditorListener implements ActionListener {

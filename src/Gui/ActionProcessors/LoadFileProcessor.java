@@ -2,9 +2,9 @@ package Gui.ActionProcessors;
 
 import CharacterCosmetics.CosmeticDetails;
 import Exceptions.FileNotSavedException;
+import Models.Model;
 import SheetConstants.AbilityNames;
 import SheetConstants.CosmeticDetailsLabels;
-import interfaces.iAbilities;
 import interfaces.iCosmeticDetails;
 import interfaces.iLoadFileProcessor;
 
@@ -26,12 +26,12 @@ public class LoadFileProcessor implements iLoadFileProcessor {
                     String key = keyValuePair[0];
                     String value = keyValuePair.length > 1 ? keyValuePair[1] : "";
                     for (Object model : stateModelList) {
-                        if (model instanceof iAbilities && contains(AbilityNames.listAbilityNames(), key)) {
+                        if (model instanceof Model && contains(AbilityNames.listAbilityNames(), key)) {
                             Abilities abilities = (Abilities) model;
                             if (!abilities.getIsSaved()) {
                                 throw new FileNotSavedException();
                             }
-                            abilities.setAbilityScore(key, Integer.parseInt(value));
+                            abilities.setData(key, Integer.parseInt(value));
                             abilities.notifyObservers(key);
                         } else if (model instanceof iCosmeticDetails
                                 && contains(CosmeticDetailsLabels.listCosmeticDetails(), key)) {

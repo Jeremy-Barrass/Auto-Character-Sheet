@@ -2,10 +2,10 @@ package Gui.ActionProcessors;
 
 import CharacterCosmetics.CosmeticDetails;
 import Exceptions.FileNotSavedException;
+import Models.Model;
 import RulesLogic.Abilities;
 import SheetConstants.AbilityNames;
 import SheetConstants.CosmeticDetailsLabels;
-import interfaces.iAbilities;
 import interfaces.iCosmeticDetails;
 import interfaces.iNewFileProcessor;
 
@@ -14,13 +14,13 @@ import java.util.ArrayList;
 public class NewFileProcessor implements iNewFileProcessor {
     public void CreateNewFile(ArrayList<Object> models) throws FileNotSavedException {
         for (Object model : models) {
-            if (model instanceof iAbilities) {
+            if (model instanceof Model) {
                 Abilities abilities = (Abilities) model;
                 if (!abilities.getIsSaved()) {
                     throw new FileNotSavedException();
                 }
                 for (String name : AbilityNames.listAbilityNames()) {
-                    abilities.setAbilityScore(name, 0);
+                    abilities.setData(name, 0);
                     abilities.notifyObservers(name);
                 }
             } else if (model instanceof iCosmeticDetails) {

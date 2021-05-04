@@ -1,8 +1,8 @@
 package Gui.ActionProcessors;
 
+import Models.Model;
 import SheetConstants.AbilityNames;
 import SheetConstants.CosmeticDetailsLabels;
-import interfaces.iAbilities;
 import interfaces.iCosmeticDetails;
 import interfaces.iSaveFileProcessor;
 import interfaces.iSaveMonitor;
@@ -15,9 +15,9 @@ public class SaveFileProcessor<T> implements iSaveFileProcessor {
         if (!file.getName().isEmpty() && file.getName() != null) {
             try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (Object model : modelList) {
-                    if (model instanceof iAbilities) {
+                    if (model instanceof Model) {
                         for (String ability : AbilityNames.listAbilityNames()) {
-                            writer.write(ability + ":" + ((iAbilities) model).getAbilityScore(ability) + "\n");
+                            writer.write(ability + ":" + ((Model) model).getData(ability) + "\n");
                         }
                         ((iSaveMonitor) model).setIsSaved(true);
                     } else if (model instanceof iCosmeticDetails) {

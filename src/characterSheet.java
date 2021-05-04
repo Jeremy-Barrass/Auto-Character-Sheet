@@ -4,19 +4,19 @@ import Gui.ActionProcessors.NewFileProcessor;
 import Gui.ActionProcessors.SaveFileProcessor;
 import Gui.Gui;
 import Gui.Menu.MenuBar;
+import Models.Model;
 import RulesLogic.Abilities;
 import interfaces.*;
 
 public class characterSheet implements iCharacterSheet {
 
     private iGui gui;
-	private iAbilities abilityScores;
+	private Model abilityScores;
 	private iCosmeticDetails cosmeticDetails;
-	private iSaveFileProcessor saveProc;
 
     public characterSheet(String[] config,
                           iGui gui,
-                          iAbilities abilities,
+                          Model abilities,
                           iCosmeticDetails details) {
 		this.gui = gui;
 		this.abilityScores = abilities;

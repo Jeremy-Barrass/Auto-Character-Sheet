@@ -1,17 +1,15 @@
 package RulesLogic;
 
-import interfaces.iAbilities;
-import interfaces.iSaveMonitor;
+import Models.Model;
 
 import java.util.Hashtable;
-import java.util.Observable;
 
 import static SheetConstants.AbilityNames.*;
 
 /**
  * Created by jeremy on 29/05/17.
  */
-public class Abilities extends Observable implements iAbilities, iSaveMonitor {
+public class Abilities extends Model<Integer> {
     private int strengthScore;
     private int dexterityScore;
     private int constitutionScore;
@@ -38,19 +36,19 @@ public class Abilities extends Observable implements iAbilities, iSaveMonitor {
         isSaved = false;
     }
 
-    public boolean getIsSaved() {
-        return isSaved;
+    public void setData(String label, Object data) {
+        setAbilityScore(label, (int) data);
     }
 
-    public void setIsSaved(boolean saved) {
-        this.isSaved = saved;
+    public Integer getData(String label) {
+        return getAbilityScore(label);
     }
 
-    public int getAbilityScore(String ability) {
+    private int getAbilityScore(String ability) {
         return AbilityMap.get(ability);
     }
 
-    public void setAbilityScore(String ability, int score) {
+    private void setAbilityScore(String ability, int score) {
         if (score >= 0) {
             switch (ability) {
                 case Strength:

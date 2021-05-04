@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static java.util.OptionalInt.of;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -18,7 +19,7 @@ public class TestNewProcessor {
         Abilities testAbilities = new Abilities();
         testAbilities.setIsSaved(true);
         for (String name : AbilityNames.listAbilityNames()) {
-            testAbilities.setAbilityScore(name, 10);
+            testAbilities.setData(name, 10);
         }
 
         CosmeticDetails testDetails = new CosmeticDetails();
@@ -38,7 +39,7 @@ public class TestNewProcessor {
 
         // Assert
         for (String name : AbilityNames.listAbilityNames()) {
-            assertEquals(0, testAbilities.getAbilityScore(name));
+            assertEquals(of(0), of(testAbilities.getData(name)));
         }
 
         for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
