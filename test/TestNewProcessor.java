@@ -1,6 +1,7 @@
 import Exceptions.FileNotSavedException;
 import Gui.ActionProcessors.NewFileProcessor;
 import CharacterCosmetics.CosmeticDetails;
+import Models.Model;
 import RulesLogic.Abilities;
 import SheetConstants.AbilityNames;
 import SheetConstants.CosmeticDetailsLabels;
@@ -25,10 +26,10 @@ public class TestNewProcessor {
         CosmeticDetails testDetails = new CosmeticDetails();
         testDetails.setIsSaved(true);
         for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
-            testDetails.setDetail(detail, "Test detail");
+            testDetails.setData(detail, "Test detail");
         }
 
-        ArrayList<Object> modelList = new ArrayList<>();
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(testAbilities);
         modelList.add(testDetails);
 
@@ -43,7 +44,7 @@ public class TestNewProcessor {
         }
 
         for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
-            assertEquals("", testDetails.getDetail(detail));
+            assertEquals("", testDetails.getData(detail));
         }
     }
 
@@ -56,7 +57,7 @@ public class TestNewProcessor {
         when(mockAbilities.getIsSaved()).thenReturn(true);
         when(mockDetails.getIsSaved()).thenReturn(true);
 
-        ArrayList<Object> modelList = new ArrayList<>();
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
         modelList.add(mockDetails);
 
@@ -76,9 +77,10 @@ public class TestNewProcessor {
         Abilities mockAbilities = mock(Abilities.class);
         CosmeticDetails mockDetails = mock(CosmeticDetails.class);
 
-        when(mockAbilities.getIsSaved()).thenReturn(true);        when(mockDetails.getIsSaved()).thenReturn(false);
+        when(mockAbilities.getIsSaved()).thenReturn(true);
+        when(mockDetails.getIsSaved()).thenReturn(false);
 
-        ArrayList<Object> modelList = new ArrayList<>();
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
         modelList.add(mockDetails);
 

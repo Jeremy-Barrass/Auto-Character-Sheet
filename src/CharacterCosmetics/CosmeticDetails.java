@@ -1,19 +1,15 @@
 package CharacterCosmetics;
 
+import Models.Model;
 import SheetConstants.CosmeticDetailsLabels;
-import interfaces.iCosmeticDetails;
-import interfaces.iSaveMonitor;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Observable;
 
-
-public class CosmeticDetails extends Observable implements iCosmeticDetails, iSaveMonitor {
+public class CosmeticDetails extends Model<String> {
     private static Hashtable<String, String> Details;
     private static ArrayList<String> checkList;
     private ArrayList<String> labelKeys;
-    private boolean isSaved;
 
     public CosmeticDetails() {
         Details = new Hashtable<String, String>();
@@ -24,22 +20,21 @@ public class CosmeticDetails extends Observable implements iCosmeticDetails, iSa
             labelKeys.add(label);
             checkList.add(label.toLowerCase());
         }
-        isSaved = false;
     }
 
-    public boolean getIsSaved() {
-        return isSaved;
+    public void setData(String label, Object data) {
+        setDetail(label, (String) data);
     }
 
-    public void setIsSaved(boolean saved) {
-        isSaved = saved;
+    public String getData(String label) {
+        return getDetail(label);
     }
 
-    public String getDetail(String detail) {
+    private String getDetail(String detail) {
         return Details.get(detail);
     }
 
-    public void setDetail(String label, String detail) {
+    private void setDetail(String label, String detail) {
         if (!Details.keySet().contains(label)) return;
 
         Details.put(label, detail);

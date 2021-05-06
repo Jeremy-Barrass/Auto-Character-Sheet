@@ -1,30 +1,30 @@
 package Gui.ActionProcessors;
 
+import CharacterCosmetics.CosmeticDetails;
 import Models.Model;
+import RulesLogic.Abilities;
 import SheetConstants.AbilityNames;
 import SheetConstants.CosmeticDetailsLabels;
-import interfaces.iCosmeticDetails;
 import interfaces.iSaveFileProcessor;
-import interfaces.iSaveMonitor;
 
 import java.io.*;
 import java.util.ArrayList;
 
 public class SaveFileProcessor<T> implements iSaveFileProcessor {
-    public void saveFile(File file, ArrayList<Object> modelList) {
+    public void saveFile(File file, ArrayList<Model> modelList) {
         if (!file.getName().isEmpty() && file.getName() != null) {
             try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                for (Object model : modelList) {
-                    if (model instanceof Model) {
+                for (Model model : modelList) {
+                    if (model instanceof Abilities) {
                         for (String ability : AbilityNames.listAbilityNames()) {
-                            writer.write(ability + ":" + ((Model) model).getData(ability) + "\n");
+                            writer.write(ability + ":" + model.getData(ability) + "\n");
                         }
-                        ((iSaveMonitor) model).setIsSaved(true);
-                    } else if (model instanceof iCosmeticDetails) {
+                        model.setIsSaved(true);
+                    } else if (model instanceof CosmeticDetails) {
                         for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
-                            writer.write(detail + ":" + ((iCosmeticDetails) model).getDetail(detail) + "\n");
+                            writer.write(detail + ":" + model.getData(detail) + "\n");
                         }
-                        ((iSaveMonitor) model).setIsSaved(true);
+                        model.setIsSaved(true);
                     }
                 }
             } catch (IOException exception) {

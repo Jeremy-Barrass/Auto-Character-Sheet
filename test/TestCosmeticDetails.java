@@ -38,7 +38,7 @@ public class TestCosmeticDetails {
         characterDetails.setConfigDetails(params);
 
         // Assert
-        Assert.assertEquals(COLOUR, characterDetails.getDetail(EYES));
+        Assert.assertEquals(COLOUR, characterDetails.getData(EYES));
     }
 
     @Test
@@ -50,10 +50,10 @@ public class TestCosmeticDetails {
         characterDetails.setConfigDetails(params);
 
         // Assert
-        Assert.assertEquals(COLOUR, characterDetails.getDetail(EYES));
-        Assert.assertEquals(NAME, characterDetails.getDetail(CHARACTER_NAME));
-        Assert.assertEquals(LAST_NAME, characterDetails.getDetail(PLAYER));
-        Assert.assertEquals(GARBAGE, characterDetails.getDetail(DEITY));
+        Assert.assertEquals(COLOUR, characterDetails.getData(EYES));
+        Assert.assertEquals(NAME, characterDetails.getData(CHARACTER_NAME));
+        Assert.assertEquals(LAST_NAME, characterDetails.getData(PLAYER));
+        Assert.assertEquals(GARBAGE, characterDetails.getData(DEITY));
     }
 
     @Test
@@ -65,10 +65,10 @@ public class TestCosmeticDetails {
         characterDetails.setConfigDetails(params);
 
         // Assert
-        Assert.assertEquals("", characterDetails.getDetail(EYES));
-        Assert.assertEquals("", characterDetails.getDetail(CHARACTER_NAME));
-        Assert.assertEquals("", characterDetails.getDetail(PLAYER));
-        Assert.assertEquals("", characterDetails.getDetail(DEITY));
+        Assert.assertEquals("", characterDetails.getData(EYES));
+        Assert.assertEquals("", characterDetails.getData(CHARACTER_NAME));
+        Assert.assertEquals("", characterDetails.getData(PLAYER));
+        Assert.assertEquals("", characterDetails.getData(DEITY));
 
     }
 }

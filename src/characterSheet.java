@@ -12,16 +12,16 @@ public class characterSheet implements iCharacterSheet {
 
     private iGui gui;
 	private Model abilityScores;
-	private iCosmeticDetails cosmeticDetails;
+	private Model cosmeticDetails;
 
     public characterSheet(String[] config,
                           iGui gui,
                           Model abilities,
-                          iCosmeticDetails details) {
+                          Model details) {
 		this.gui = gui;
 		this.abilityScores = abilities;
 		this.cosmeticDetails = details;
-		cosmeticDetails.setConfigDetails(config);
+		((CosmeticDetails) cosmeticDetails).setConfigDetails(config);
 
 	}
 

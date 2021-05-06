@@ -36,13 +36,13 @@ public class Gui implements iGui {
     private CosmeticsEditor cosmeticsEditor;
 
     private ActionListener[] listeners;
-    private ArrayList<Object> stateModels;
+    private ArrayList<Model> stateModels;
 
     private File fileToLoad;
 
     public Gui(iMenuBar menu, iSaveFileProcessor saveFileProcessor, iLoadFileProcessor loadFileProcessor, iNewFileProcessor newFileProcessor) {
         this.menu = menu;
-        stateModels = new ArrayList<Object>();
+        stateModels = new ArrayList<>();
 
         this.saveProc = saveFileProcessor;
         this.loadProc = loadFileProcessor;
@@ -57,7 +57,7 @@ public class Gui implements iGui {
         };
     }
 
-    public void run(Model abilities, iCosmeticDetails details) {
+    public void run(Model abilities, Model details) {
         generateAbilities(abilities);
         generateDetails(details);
         stateModels.add(abilities);
@@ -76,7 +76,7 @@ public class Gui implements iGui {
         abilityEditor = new AbilityEditor(abilities);
     }
 
-    private void generateDetails(iCosmeticDetails details) {
+    private void generateDetails(Model details) {
         cosmeticsDisplay = new CosmeticsDisplay(details);
         cosmeticsEditor = new CosmeticsEditor(details);
     }
@@ -145,7 +145,7 @@ public class Gui implements iGui {
         }
     }
 
-    private void showFileNotSavedDialogue(ArrayList<Object> stateModels, boolean isLoading) {
+    private void showFileNotSavedDialogue(ArrayList<Model> stateModels, boolean isLoading) {
         int option = JOptionPane.showConfirmDialog(f,
                 "This Character Sheet has not been saved!\n" +
                 "Do you want to save this Character?",
@@ -154,8 +154,8 @@ public class Gui implements iGui {
         if (option < 1) {
             displaySaveFileMenu();
         } else {
-            for (Object model : stateModels) {
-                ((iSaveMonitor) model).setIsSaved(true);
+            for (Model model : stateModels) {
+                model.setIsSaved(true);
             }
             if (isLoading) {
                 loadFile(fileToLoad);

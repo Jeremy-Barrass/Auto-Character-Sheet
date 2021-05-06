@@ -2,8 +2,8 @@ package Gui.Editor;
 
 import CharacterCosmetics.CosmeticDetails;
 import Gui.JGridPanel;
+import Models.Model;
 import SheetConstants.CosmeticDetailsLabels;
-import interfaces.iCosmeticDetails;
 import interfaces.iDisplay;
 
 import javax.swing.*;
@@ -23,7 +23,7 @@ public class CosmeticsEditor extends JPanel implements iDisplay, Observer {
     private JButton button;
     private CosmeticsEditorListener listener;
 
-    public CosmeticsEditor(iCosmeticDetails details) {
+    public CosmeticsEditor(Model details) {
         this.details = (CosmeticDetails) details;
         this.details.addObserver(this);
         listener = new CosmeticsEditorListener();
@@ -49,8 +49,8 @@ public class CosmeticsEditor extends JPanel implements iDisplay, Observer {
     private void updateDetails() {
         for (String detail : map.keySet()) {
             String detailText = map.get(detail).getText();
-            if (!detailText.isEmpty() && !detailText.matches(details.getDetail(detail))) {
-                details.setDetail(detail, detailText);
+            if (!detailText.isEmpty() && !detailText.matches(details.getData(detail))) {
+                details.setData(detail, detailText);
                 details.setIsSaved(false);
                 details.notifyObservers(detail);
             }
@@ -60,7 +60,7 @@ public class CosmeticsEditor extends JPanel implements iDisplay, Observer {
     public void update(Observable observable, Object o) {
         CosmeticDetails observableDetails = (CosmeticDetails) observable;
         String changedDetail = (String) o;
-        map.get(changedDetail).setText(observableDetails.getDetail(changedDetail));
+        map.get(changedDetail).setText(observableDetails.getData(changedDetail));
     }
 
     private class CosmeticsEditorListener implements ActionListener {

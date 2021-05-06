@@ -16,7 +16,6 @@ public class Abilities extends Model<Integer> {
     private int intelligenceScore;
     private int wisdomScore;
     private int charismaScore;
-    private boolean isSaved;
 
     private static Hashtable<String, Integer> AbilityMap;
 
@@ -33,7 +32,6 @@ public class Abilities extends Model<Integer> {
     public Abilities() {
         AbilityMap = new Hashtable<String, Integer>();
         setAbilities();
-        isSaved = false;
     }
 
     public void setData(String label, Object data) {
