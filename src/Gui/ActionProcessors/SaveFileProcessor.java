@@ -16,14 +16,10 @@ public class SaveFileProcessor<T> implements iSaveFileProcessor {
             try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (Model model : modelList) {
                     if (model instanceof Abilities) {
-                        for (String ability : AbilityNames.listAbilityNames()) {
-                            writer.write(ability + ":" + model.getData(ability) + "\n");
-                        }
+                        writeToFile(writer, AbilityNames.listAbilityNames(), model);
                         model.setIsSaved(true);
                     } else if (model instanceof CosmeticDetails) {
-                        for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
-                            writer.write(detail + ":" + model.getData(detail) + "\n");
-                        }
+                        writeToFile(writer, CosmeticDetailsLabels.listCosmeticDetails(), model);
                         model.setIsSaved(true);
                     }
                 }
@@ -31,6 +27,12 @@ public class SaveFileProcessor<T> implements iSaveFileProcessor {
                 System.out.println("Could not save character, sorry.");
                 exception.printStackTrace();
             }
+        }
+    }
+
+    private void writeToFile(BufferedWriter writer, String[] labelList, Model model) throws IOException {
+        for (String label : labelList) {
+            writer.write(label + ":" + model.getData(label) + "\n");
         }
     }
 }

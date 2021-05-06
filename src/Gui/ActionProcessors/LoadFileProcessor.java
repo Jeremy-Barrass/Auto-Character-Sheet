@@ -25,19 +25,12 @@ public class LoadFileProcessor implements iLoadFileProcessor {
                     String key = keyValuePair[0];
                     String value = keyValuePair.length > 1 ? keyValuePair[1] : "";
                     for (Model model : stateModelList) {
-                        if (model instanceof Abilities && contains(AbilityNames.listAbilityNames(), key)) {
-                            if (!model.getIsSaved()) {
-                                throw new FileNotSavedException();
-                            }
-                            model.setData(key, Integer.parseInt(value));
-                            model.notifyObservers(key);
+                        if (model instanceof Abilities
+                                && contains(AbilityNames.listAbilityNames(), key)) {
+                            addDataToModel(key, value, model);
                         } else if (model instanceof CosmeticDetails
                                 && contains(CosmeticDetailsLabels.listCosmeticDetails(), key)) {
-                            if (!model.getIsSaved()) {
-                                throw new FileNotSavedException();
-                            }
-                            model.setData(key, value);
-                            model.notifyObservers(key);
+                            addDataToModel(key, value, model);
                         }
                     }
                 }
@@ -55,5 +48,13 @@ public class LoadFileProcessor implements iLoadFileProcessor {
 
     private boolean contains(String[] arr, String value) {
         return Arrays.stream(arr).anyMatch(value::equals);
+    }
+
+    private void addDataToModel(String key, String value, Model model) throws FileNotSavedException {
+        if (!model.getIsSaved()) {
+            throw new FileNotSavedException();
+        }
+        model.setData(key, value);
+        model.notifyObservers(key);
     }
 }

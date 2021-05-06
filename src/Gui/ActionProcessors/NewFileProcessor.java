@@ -14,22 +14,20 @@ public class NewFileProcessor implements iNewFileProcessor {
     public void CreateNewFile(ArrayList<Model> models) throws FileNotSavedException {
         for (Model model : models) {
             if (model instanceof Abilities) {
-                if (!model.getIsSaved()) {
-                    throw new FileNotSavedException();
-                }
-                for (String name : AbilityNames.listAbilityNames()) {
-                    model.setData(name, 0);
-                    model.notifyObservers(name);
-                }
+                resetToDefault(AbilityNames.listAbilityNames(), model, 0);
             } else if (model instanceof CosmeticDetails) {
-                if (!model.getIsSaved()) {
-                    throw new FileNotSavedException();
-                }
-                for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
-                    model.setData(detail, "");
-                    model.notifyObservers(detail);
-                }
+                resetToDefault(CosmeticDetailsLabels.listCosmeticDetails(), model, "");
             }
+        }
+    }
+
+    private void resetToDefault(String[] labelList, Model model, Object defaultData) throws FileNotSavedException {
+        if (!model.getIsSaved()) {
+            throw new FileNotSavedException();
+        }
+        for (String label : labelList) {
+            model.setData(label, defaultData);
+            model.notifyObservers(label);
         }
     }
 }
