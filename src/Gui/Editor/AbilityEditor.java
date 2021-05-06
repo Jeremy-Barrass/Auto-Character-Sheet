@@ -14,7 +14,7 @@ import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
 
-public class AbilityEditor extends JPanel implements iDisplay, Observer {
+public class AbilityEditor extends Editor<JTextField> {
     private Abilities abilities;
     private ActionListener listener;
     private Hashtable<String, JTextField> editMap;
@@ -46,7 +46,11 @@ public class AbilityEditor extends JPanel implements iDisplay, Observer {
         add(BorderLayout.SOUTH, saveButton);
     }
 
-    private void UpdateAbilities() {
+    public void updateModel() {
+        updateAbilities();
+    }
+
+    private void updateAbilities() {
         for (String ability : editMap.keySet()) {
             int score = Integer.parseInt(editMap.get(ability).getText());
             if (score != abilities.getData(ability)) {
@@ -62,10 +66,9 @@ public class AbilityEditor extends JPanel implements iDisplay, Observer {
         String changedAbility = (String) o;
         editMap.get(changedAbility).setText(Integer.toString(abilities.getData(changedAbility)));
     }
-
     private class AbilityEditorListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            UpdateAbilities();
+            updateAbilities();
         }
     }
 }
