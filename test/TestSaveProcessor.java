@@ -1,6 +1,6 @@
-import CharacterCosmetics.CosmeticDetails;
+import Models.CharacterCosmetics.CosmeticDetails;
 import Gui.ActionProcessors.SaveFileProcessor;
-import RulesLogic.Abilities;
+import Models.RulesLogic.Abilities;
 import org.junit.Test;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 

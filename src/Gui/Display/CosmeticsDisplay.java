@@ -1,6 +1,6 @@
 package Gui.Display;
 
-import CharacterCosmetics.CosmeticDetails;
+import Models.CharacterCosmetics.CosmeticDetails;
 import Models.Model;
 import SheetConstants.CosmeticDetailsLabels;
 import interfaces.iDisplay;

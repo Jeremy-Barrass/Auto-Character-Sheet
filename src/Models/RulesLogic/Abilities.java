@@ -1,4 +1,4 @@
-package RulesLogic;
+package Models.RulesLogic;
 
 import Models.Model;
 

@@ -1,7 +1,7 @@
-import CharacterCosmetics.CosmeticDetails;
+import Models.CharacterCosmetics.CosmeticDetails;
 import Gui.ActionProcessors.SaveFileProcessor;
 import Gui.Gui;
-import RulesLogic.Abilities;
+import Models.RulesLogic.Abilities;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

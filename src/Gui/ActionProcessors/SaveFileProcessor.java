@@ -1,8 +1,8 @@
 package Gui.ActionProcessors;
 
-import CharacterCosmetics.CosmeticDetails;
+import Models.CharacterCosmetics.CosmeticDetails;
 import Models.Model;
-import RulesLogic.Abilities;
+import Models.RulesLogic.Abilities;
 import SheetConstants.AbilityNames;
 import SheetConstants.CosmeticDetailsLabels;
 import interfaces.iSaveFileProcessor;

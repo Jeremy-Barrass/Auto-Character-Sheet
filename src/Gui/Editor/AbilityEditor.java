@@ -2,7 +2,7 @@ package Gui.Editor;
 
 import Gui.JGridPanel;
 import Models.Model;
-import RulesLogic.Abilities;
+import Models.RulesLogic.Abilities;
 import SheetConstants.AbilityNames;
 import interfaces.iDisplay;
 

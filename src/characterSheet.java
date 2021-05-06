@@ -1,11 +1,11 @@
-import CharacterCosmetics.CosmeticDetails;
+import Models.CharacterCosmetics.CosmeticDetails;
 import Gui.ActionProcessors.LoadFileProcessor;
 import Gui.ActionProcessors.NewFileProcessor;
 import Gui.ActionProcessors.SaveFileProcessor;
 import Gui.Gui;
 import Gui.Menu.MenuBar;
 import Models.Model;
-import RulesLogic.Abilities;
+import Models.RulesLogic.Abilities;
 import interfaces.*;
 
 public class characterSheet implements iCharacterSheet {

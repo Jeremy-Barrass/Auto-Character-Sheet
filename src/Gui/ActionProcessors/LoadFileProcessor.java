@@ -1,13 +1,13 @@
 package Gui.ActionProcessors;
 
-import CharacterCosmetics.CosmeticDetails;
+import Models.CharacterCosmetics.CosmeticDetails;
 import Exceptions.FileNotSavedException;
 import Models.Model;
 import SheetConstants.AbilityNames;
 import SheetConstants.CosmeticDetailsLabels;
 import interfaces.iLoadFileProcessor;
 
-import RulesLogic.Abilities;
+import Models.RulesLogic.Abilities;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -1,4 +1,4 @@
-package CharacterCosmetics;
+package Models.CharacterCosmetics;
 
 import Models.Model;
 import SheetConstants.CosmeticDetailsLabels;

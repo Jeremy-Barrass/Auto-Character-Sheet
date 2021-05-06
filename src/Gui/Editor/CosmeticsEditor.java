@@ -1,6 +1,6 @@
 package Gui.Editor;
 
-import CharacterCosmetics.CosmeticDetails;
+import Models.CharacterCosmetics.CosmeticDetails;
 import Gui.JGridPanel;
 import Models.Model;
 import SheetConstants.CosmeticDetailsLabels;

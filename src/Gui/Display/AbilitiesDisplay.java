@@ -2,7 +2,7 @@ package Gui.Display;
 
 import Gui.JColumn;
 import Models.Model;
-import RulesLogic.Abilities;
+import Models.RulesLogic.Abilities;
 import SheetConstants.AbilityNames;
 import interfaces.iDisplay;
 

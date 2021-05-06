@@ -1,4 +1,4 @@
-import CharacterCosmetics.CosmeticDetails;
+import Models.CharacterCosmetics.CosmeticDetails;
 import SheetConstants.CosmeticDetailsLabels;
 import org.junit.Assert;
 import org.junit.Before;
