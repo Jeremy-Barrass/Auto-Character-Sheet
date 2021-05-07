@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Observable;
 
 public class AbilityEditor extends Editor<JTextField> {
