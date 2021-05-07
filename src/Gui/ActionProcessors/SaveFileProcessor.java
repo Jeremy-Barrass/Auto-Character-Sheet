@@ -10,7 +10,7 @@ import interfaces.iSaveFileProcessor;
 import java.io.*;
 import java.util.ArrayList;
 
-public class SaveFileProcessor<T> implements iSaveFileProcessor {
+public class SaveFileProcessor implements iSaveFileProcessor {
     public void saveFile(File file, ArrayList<Model> modelList) {
         if (!file.getName().isEmpty() && file.getName() != null) {
             try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {

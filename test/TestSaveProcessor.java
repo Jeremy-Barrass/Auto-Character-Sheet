@@ -1,5 +1,6 @@
 import Models.CharacterCosmetics.CosmeticDetails;
 import Gui.ActionProcessors.SaveFileProcessor;
+import Models.Model;
 import Models.RulesLogic.Abilities;
 import org.junit.Test;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -18,7 +19,7 @@ public class TestSaveProcessor {
         // Arrange
         Abilities mockAbilities = mock(Abilities.class);
         CosmeticDetails mockDetails = mock(CosmeticDetails.class);
-        ArrayList<Object> modelList = new ArrayList<>();
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
         modelList.add(mockDetails);
         SaveFileProcessor saveProcessor = new SaveFileProcessor();
@@ -36,7 +37,7 @@ public class TestSaveProcessor {
         // Arrange
         Abilities mockAbilities = mock(Abilities.class);
         CosmeticDetails mockDetails = mock(CosmeticDetails.class);
-        ArrayList<Object> modelList = new ArrayList<>();
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
         modelList.add(mockDetails);
         SaveFileProcessor saveProcessor = new SaveFileProcessor();
@@ -55,7 +56,7 @@ public class TestSaveProcessor {
         // Arrange
         Abilities mockAbilities = mock(Abilities.class);
         CosmeticDetails mockDetails = mock(CosmeticDetails.class);
-        ArrayList<Object> modelList = new ArrayList<>();
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
         modelList.add(mockDetails);
         SaveFileProcessor saveProcessor = new SaveFileProcessor();

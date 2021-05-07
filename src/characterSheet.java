@@ -32,10 +32,7 @@ public class characterSheet implements iCharacterSheet {
     public static void main(String[] args) {
         characterSheet sheet = new characterSheet(args,
                 new Gui(
-                        new MenuBar(),
-                        new SaveFileProcessor(),
-                        new LoadFileProcessor(),
-                        new NewFileProcessor()
+                        new MenuBar()
                 ),
                 new Abilities(),
                 new CosmeticDetails());

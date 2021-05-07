@@ -35,7 +35,7 @@ public class Abilities extends Model<Integer> {
     }
 
     public void setData(String label, Object data) {
-        setAbilityScore(label, (int) data);
+        setAbilityScore(label, Integer.parseInt(data.toString()));
     }
 
     public Integer getData(String label) {
