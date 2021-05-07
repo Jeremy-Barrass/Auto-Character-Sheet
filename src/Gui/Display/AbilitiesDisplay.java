@@ -4,16 +4,13 @@ import Gui.JColumn;
 import Models.Model;
 import Models.RulesLogic.Abilities;
 import SheetConstants.AbilityNames;
-import interfaces.iDisplay;
 
 import javax.swing.*;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Observable;
-import java.util.Observer;
 
-public class AbilitiesDisplay extends JPanel implements iDisplay, Observer {
+public class AbilitiesDisplay extends Display {
     private Abilities abilities;
-    private Hashtable<String, JLabel> displayMap;
     private JColumn abilityTitles;
     private JColumn abilityScores;
     private JLabel title;
@@ -22,7 +19,7 @@ public class AbilitiesDisplay extends JPanel implements iDisplay, Observer {
     public AbilitiesDisplay(Model abilities) {
         this.abilities = (Abilities) abilities;
         this.abilities.addObserver(this);
-        displayMap = new Hashtable<>();
+        labelDataMap = new HashMap<>();
     }
 
     public void display(){
@@ -33,7 +30,7 @@ public class AbilitiesDisplay extends JPanel implements iDisplay, Observer {
             abilityTitles.add(title);
             score = new JLabel(Integer.toString(abilities.getData(statName)));
             abilityScores.add(score);
-            displayMap.put(statName, score);
+            labelDataMap.put(statName, score);
         }
         add(abilityTitles);
         add(abilityScores);
@@ -42,6 +39,6 @@ public class AbilitiesDisplay extends JPanel implements iDisplay, Observer {
     public void update(Observable o, Object arg) {
         Abilities abilities = (Abilities) o;
         String changedAbility = (String) arg;
-        displayMap.get(changedAbility).setText(Integer.toString(abilities.getData(changedAbility)));
+        labelDataMap.get(changedAbility).setText(Integer.toString(abilities.getData(changedAbility)));
     }
 }

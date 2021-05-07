@@ -1,22 +1,20 @@
 package Gui;
 
-import Exceptions.FileNotSavedException;
 import Gui.Display.AbilitiesDisplay;
 import Gui.Display.CosmeticsDisplay;
 import Gui.Editor.AbilityEditor;
 import Gui.Editor.CosmeticsEditor;
-import Gui.Menu.MenuBar;
 import Models.Model;
-import interfaces.*;
+import interfaces.iDisplay;
+import interfaces.iGui;
+import interfaces.iMenuBar;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 
-import static java.awt.BorderLayout.*;
+import static java.awt.BorderLayout.NORTH;
+import static java.awt.BorderLayout.WEST;
 
 public class Gui implements iGui {
     private iMenuBar menu;
