@@ -15,17 +15,11 @@ public class characterSheet implements iCharacterSheet {
 
     private iGui gui;
     private iModelFactory modelFactory;
-//	private Model abilityScores;
-//	private Model cosmeticDetails;
 
     public characterSheet(iGui gui,
                           iModelFactory modelFactory) {
 		this.gui = gui;
 		this.modelFactory = modelFactory;
-//		this.abilityScores = abilities;
-//		this.cosmeticDetails = details;
-//		((CosmeticDetails) cosmeticDetails).setConfigDetails(config);
-
 	}
 
     public void generateGui() {

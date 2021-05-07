@@ -52,6 +52,7 @@ public class CosmeticDetails extends Model<String> {
         for (int x = 0; x < details.length; x++) {
             String key = details[x];
             String value = x+1 >= details.length ? "" : details[x+1];
+
             if (checkList.contains(details[x].toLowerCase())) {
                 Details.put(key, value);
                 details[x] = "";
