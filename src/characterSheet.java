@@ -1,3 +1,6 @@
+import Factories.DisplayFactory;
+import Factories.EditorFactory;
+import Factories.ModelFactory;
 import Models.CharacterCosmetics.CosmeticDetails;
 import Gui.ActionProcessors.LoadFileProcessor;
 import Gui.ActionProcessors.NewFileProcessor;
@@ -11,31 +14,32 @@ import interfaces.*;
 public class characterSheet implements iCharacterSheet {
 
     private iGui gui;
-	private Model abilityScores;
-	private Model cosmeticDetails;
+    private iModelFactory modelFactory;
+//	private Model abilityScores;
+//	private Model cosmeticDetails;
 
-    public characterSheet(String[] config,
-                          iGui gui,
-                          Model abilities,
-                          Model details) {
+    public characterSheet(iGui gui,
+                          iModelFactory modelFactory) {
 		this.gui = gui;
-		this.abilityScores = abilities;
-		this.cosmeticDetails = details;
-		((CosmeticDetails) cosmeticDetails).setConfigDetails(config);
+		this.modelFactory = modelFactory;
+//		this.abilityScores = abilities;
+//		this.cosmeticDetails = details;
+//		((CosmeticDetails) cosmeticDetails).setConfigDetails(config);
 
 	}
 
     public void generateGui() {
-        gui.run(this.abilityScores, this.cosmeticDetails);
+        gui.run(this.modelFactory);
     }
 
     public static void main(String[] args) {
-        characterSheet sheet = new characterSheet(args,
+        characterSheet sheet = new characterSheet(
                 new Gui(
-                        new MenuBar()
+                        new MenuBar(),
+                        new DisplayFactory(),
+                        new EditorFactory()
                 ),
-                new Abilities(),
-                new CosmeticDetails());
+                new ModelFactory(args));
         sheet.generateGui();
     }
 }

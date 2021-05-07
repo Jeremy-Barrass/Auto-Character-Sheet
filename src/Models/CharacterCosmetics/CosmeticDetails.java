@@ -48,20 +48,24 @@ public class CosmeticDetails extends Model<String> {
         setUnamedDetails(dConfig);
     }
 
-    private void setDetailConfig(String[] details, ArrayList<String> dConfig) {
-        for (String detail : details) {
-            if (!detail.isEmpty()) {
-                dConfig.add(detail);
+    private void setNamedDetails(String[] details) {
+        for (int x = 0; x < details.length; x++) {
+            String key = details[x];
+            String value = x+1 >= details.length ? "" : details[x+1];
+            if (checkList.contains(details[x].toLowerCase())) {
+                Details.put(key, value);
+                details[x] = "";
+                if (x+1 < details.length) {
+                    details[x+1] = "";
+                }
             }
         }
     }
 
-    private void setNamedDetails(String[] details) {
-        for (int x = 0; x < details.length; x++) {
-            if (checkList.contains(details[x].toLowerCase())) {
-                Details.put(details[x], details[x+1]);
-                details[x] = "";
-                details[x+1] = "";
+    private void setDetailConfig(String[] details, ArrayList<String> dConfig) {
+        for (String detail : details) {
+            if (!detail.isEmpty()) {
+                dConfig.add(detail);
             }
         }
     }

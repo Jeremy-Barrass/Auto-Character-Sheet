@@ -2,12 +2,12 @@ package Gui;
 
 import Gui.Display.AbilitiesDisplay;
 import Gui.Display.CosmeticsDisplay;
+import Gui.Display.Display;
 import Gui.Editor.AbilityEditor;
 import Gui.Editor.CosmeticsEditor;
+import Gui.Editor.Editor;
 import Models.Model;
-import interfaces.iDisplay;
-import interfaces.iGui;
-import interfaces.iMenuBar;
+import interfaces.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,28 +19,32 @@ import static java.awt.BorderLayout.WEST;
 public class Gui implements iGui {
     private iMenuBar menu;
     private iDisplay[] components;
+    private iDisplayFactory displayFactory;
+    private iEditorFactory editorFactory;
+
     private JFrame f;
     private JTabbedPane tabs;
     private JPanel characterSheet;
     private JPanel sheetEditor;
-    private AbilitiesDisplay abilitiesDisplay;
-    private CosmeticsDisplay cosmeticsDisplay;
-    private AbilityEditor abilityEditor;
-    private CosmeticsEditor cosmeticsEditor;
+
+    private Display abilitiesDisplay;
+    private Display cosmeticsDisplay;
+
+    private Editor abilityEditor;
+    private Editor cosmeticsEditor;
 
     private ArrayList<Model> stateModels;
 
-    public Gui(iMenuBar menu) {
+    public Gui(iMenuBar menu, iDisplayFactory displayFactory, iEditorFactory editorFactory) {
         this.menu = menu;
+        this.displayFactory = displayFactory;
+        this.editorFactory = editorFactory;
         stateModels = new ArrayList<>();
-
     }
 
-    public void run(Model abilities, Model details) {
-        generateAbilities(abilities);
-        generateDetails(details);
-        stateModels.add(abilities);
-        stateModels.add(details);
+    public void run(iModelFactory modelFactory) {
+        generateAbilities(modelFactory.createModel("abilities"));
+        generateDetails(modelFactory.createModel("cosmetics"));
         components = new iDisplay[] {
                 abilitiesDisplay,
                 abilityEditor,
@@ -51,13 +55,15 @@ public class Gui implements iGui {
     }
 
     private void generateAbilities(Model abilities) {
-        abilitiesDisplay = new AbilitiesDisplay(abilities);
-        abilityEditor = new AbilityEditor(abilities);
+        abilitiesDisplay = displayFactory.createDisplay(abilities);
+        abilityEditor = editorFactory.createEditor(abilities);
+        stateModels.add(abilities);
     }
 
     private void generateDetails(Model details) {
-        cosmeticsDisplay = new CosmeticsDisplay(details);
-        cosmeticsEditor = new CosmeticsEditor(details);
+        cosmeticsDisplay = displayFactory.createDisplay(details);
+        cosmeticsEditor = editorFactory.createEditor(details);
+        stateModels.add(details);
     }
 
     private void frameSetUp() {
