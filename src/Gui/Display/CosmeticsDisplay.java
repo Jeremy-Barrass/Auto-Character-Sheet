@@ -6,7 +6,6 @@ import SheetConstants.CosmeticDetailsLabels;
 
 import javax.swing.*;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Observable;
 
 public class CosmeticsDisplay extends Display {
