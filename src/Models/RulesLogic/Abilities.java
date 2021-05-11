@@ -42,6 +42,10 @@ public class Abilities extends Model<Integer> {
         return getAbilityScore(label);
     }
 
+    public int getAbilityModifier(String ability) {
+        return 0;
+    }
+
     private int getAbilityScore(String ability) {
         return AbilityMap.get(ability);
     }
