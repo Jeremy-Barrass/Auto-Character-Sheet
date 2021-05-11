@@ -1,38 +1,33 @@
 package Gui.ActionProcessors;
 
-import CharacterCosmetics.CosmeticDetails;
+import Models.CharacterCosmetics.CosmeticDetails;
 import Exceptions.FileNotSavedException;
-import RulesLogic.Abilities;
+import Models.Model;
+import Models.RulesLogic.Abilities;
 import SheetConstants.AbilityNames;
 import SheetConstants.CosmeticDetailsLabels;
-import interfaces.iAbilities;
-import interfaces.iCosmeticDetails;
 import interfaces.iNewFileProcessor;
 
 import java.util.ArrayList;
 
 public class NewFileProcessor implements iNewFileProcessor {
-    public void CreateNewFile(ArrayList<Object> models) throws FileNotSavedException {
-        for (Object model : models) {
-            if (model instanceof iAbilities) {
-                Abilities abilities = (Abilities) model;
-                if (!abilities.getIsSaved()) {
-                    throw new FileNotSavedException();
-                }
-                for (String name : AbilityNames.listAbilityNames()) {
-                    abilities.setAbilityScore(name, 0);
-                    abilities.notifyObservers(name);
-                }
-            } else if (model instanceof iCosmeticDetails) {
-                CosmeticDetails details = (CosmeticDetails) model;
-                if (!details.getIsSaved()) {
-                    throw new FileNotSavedException();
-                }
-                for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
-                    details.setDetail(detail, "");
-                    details.notifyObservers(detail);
-                }
+    public void CreateNewFile(ArrayList<Model> models) throws FileNotSavedException {
+        for (Model model : models) {
+            if (model instanceof Abilities) {
+                resetToDefault(AbilityNames.listAbilityNames(), model, 0);
+            } else if (model instanceof CosmeticDetails) {
+                resetToDefault(CosmeticDetailsLabels.listCosmeticDetails(), model, "");
             }
+        }
+    }
+
+    private void resetToDefault(String[] labelList, Model model, Object defaultData) throws FileNotSavedException {
+        if (!model.getIsSaved()) {
+            throw new FileNotSavedException();
+        }
+        for (String label : labelList) {
+            model.setData(label, defaultData);
+            model.notifyObservers(label);
         }
     }
 }

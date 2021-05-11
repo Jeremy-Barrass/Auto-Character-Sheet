@@ -1,5 +1,7 @@
 package interfaces;
 
+import Models.Model;
+
 public interface iGui {
-    void run(iAbilities abilities, iCosmeticDetails details);
+    void run(iModelFactory modelFactory);
 }

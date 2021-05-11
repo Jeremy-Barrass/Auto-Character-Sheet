@@ -1,14 +1,13 @@
 package Gui.ActionProcessors;
 
-import CharacterCosmetics.CosmeticDetails;
+import Models.CharacterCosmetics.CosmeticDetails;
 import Exceptions.FileNotSavedException;
+import Models.Model;
 import SheetConstants.AbilityNames;
 import SheetConstants.CosmeticDetailsLabels;
-import interfaces.iAbilities;
-import interfaces.iCosmeticDetails;
 import interfaces.iLoadFileProcessor;
 
-import RulesLogic.Abilities;
+import Models.RulesLogic.Abilities;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class LoadFileProcessor implements iLoadFileProcessor {
-    public void loadFile(File file, ArrayList<Object> stateModelList) throws FileNotSavedException {
+    public void loadFile(File file, ArrayList<Model> stateModelList) throws FileNotSavedException {
         if (!file.getName().isEmpty() && file.getName() != null) {
             try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line = null;
@@ -25,22 +24,13 @@ public class LoadFileProcessor implements iLoadFileProcessor {
                     String[] keyValuePair = line.split(":");
                     String key = keyValuePair[0];
                     String value = keyValuePair.length > 1 ? keyValuePair[1] : "";
-                    for (Object model : stateModelList) {
-                        if (model instanceof iAbilities && contains(AbilityNames.listAbilityNames(), key)) {
-                            Abilities abilities = (Abilities) model;
-                            if (!abilities.getIsSaved()) {
-                                throw new FileNotSavedException();
-                            }
-                            abilities.setAbilityScore(key, Integer.parseInt(value));
-                            abilities.notifyObservers(key);
-                        } else if (model instanceof iCosmeticDetails
+                    for (Model model : stateModelList) {
+                        if (model instanceof Abilities
+                                && contains(AbilityNames.listAbilityNames(), key)) {
+                            addDataToModel(key, value, model);
+                        } else if (model instanceof CosmeticDetails
                                 && contains(CosmeticDetailsLabels.listCosmeticDetails(), key)) {
-                            CosmeticDetails details = (CosmeticDetails) model;
-                            if (!details.getIsSaved()) {
-                                throw new FileNotSavedException();
-                            }
-                            details.setDetail(key, value);
-                            details.notifyObservers(key);
+                            addDataToModel(key, value, model);
                         }
                     }
                 }
@@ -58,5 +48,13 @@ public class LoadFileProcessor implements iLoadFileProcessor {
 
     private boolean contains(String[] arr, String value) {
         return Arrays.stream(arr).anyMatch(value::equals);
+    }
+
+    private void addDataToModel(String key, String value, Model model) throws FileNotSavedException {
+        if (!model.getIsSaved()) {
+            throw new FileNotSavedException();
+        }
+        model.setData(key, value);
+        model.notifyObservers(key);
     }
 }

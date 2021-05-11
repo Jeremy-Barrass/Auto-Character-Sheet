@@ -1,9 +1,8 @@
-import CharacterCosmetics.CosmeticDetails;
+import Models.CharacterCosmetics.CosmeticDetails;
 import Exceptions.FileNotSavedException;
 import Gui.ActionProcessors.LoadFileProcessor;
-import RulesLogic.Abilities;
-import interfaces.iAbilities;
-import interfaces.iCosmeticDetails;
+import Models.Model;
+import Models.RulesLogic.Abilities;
 import org.junit.Test;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 
@@ -24,7 +23,7 @@ public class TestLoadProcessor {
         when(mockAbilities.getIsSaved()).thenReturn(true);
         when(mockDetails.getIsSaved()).thenReturn(true);
 
-        ArrayList<Object> stateModelList = new ArrayList<>();
+        ArrayList<Model> stateModelList = new ArrayList<>();
         stateModelList.add(mockAbilities);
         stateModelList.add(mockDetails);
         LoadFileProcessor loadProcessor = new LoadFileProcessor();
@@ -33,8 +32,8 @@ public class TestLoadProcessor {
         loadProcessor.loadFile(new File(String.format("%s/test/testHelpers/test-file-1.txt", System.getProperty("user.dir"))), stateModelList);
 
         // Assert
-        verify(mockAbilities, times(6)).setAbilityScore(anyString(), anyInt());
-        verify(mockDetails, times(10)).setDetail(anyString(), anyString());
+        verify(mockAbilities, times(6)).setData(anyString(), anyInt());
+        verify(mockDetails, times(10)).setData(anyString(), anyString());
     }
 
     @Test
@@ -46,7 +45,7 @@ public class TestLoadProcessor {
         when(mockAbilities.getIsSaved()).thenReturn(true);
         when(mockDetails.getIsSaved()).thenReturn(true);
 
-        ArrayList<Object> stateModelList = new ArrayList<>();
+        ArrayList<Model> stateModelList = new ArrayList<>();
         stateModelList.add(mockAbilities);
         stateModelList.add(mockDetails);
         LoadFileProcessor loadProcessor = new LoadFileProcessor();
@@ -55,8 +54,8 @@ public class TestLoadProcessor {
         loadProcessor.loadFile(new File(""), stateModelList);
 
         // Assert
-        verify(mockAbilities, times(0)).setAbilityScore(anyString(), anyInt());
-        verify(mockDetails, times(0)).setDetail(anyString(), anyString());
+        verify(mockAbilities, times(0)).setData(anyString(), anyInt());
+        verify(mockDetails, times(0)).setData(anyString(), anyString());
     }
 
     @Test
@@ -68,7 +67,7 @@ public class TestLoadProcessor {
         when(mockAbilities.getIsSaved()).thenReturn(true);
         when(mockDetails.getIsSaved()).thenReturn(true);
 
-        ArrayList<Object> modelList = new ArrayList<>();
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
         modelList.add(mockDetails);
 
@@ -91,7 +90,7 @@ public class TestLoadProcessor {
         when(mockAbilities.getIsSaved()).thenReturn(true);
         when(mockDetails.getIsSaved()).thenReturn(false);
 
-        ArrayList<Object> modelList = new ArrayList<>();
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
         modelList.add(mockDetails);
 

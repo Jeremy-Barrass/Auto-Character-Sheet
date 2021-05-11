@@ -1,8 +1,7 @@
-import CharacterCosmetics.CosmeticDetails;
+import Models.CharacterCosmetics.CosmeticDetails;
 import Gui.ActionProcessors.SaveFileProcessor;
-import RulesLogic.Abilities;
-import interfaces.*;
-import interfaces.iCosmeticDetails;
+import Models.Model;
+import Models.RulesLogic.Abilities;
 import org.junit.Test;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 
@@ -20,7 +19,7 @@ public class TestSaveProcessor {
         // Arrange
         Abilities mockAbilities = mock(Abilities.class);
         CosmeticDetails mockDetails = mock(CosmeticDetails.class);
-        ArrayList<Object> modelList = new ArrayList<>();
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
         modelList.add(mockDetails);
         SaveFileProcessor saveProcessor = new SaveFileProcessor();
@@ -29,8 +28,8 @@ public class TestSaveProcessor {
         saveProcessor.saveFile(new File("test/testHelpers/test-file.txt"), modelList);
 
         // Assert
-        verify(mockAbilities, times(6)).getAbilityScore(anyString());
-        verify(mockDetails, times(10)).getDetail(anyString());
+        verify(mockAbilities, times(6)).getData(anyString());
+        verify(mockDetails, times(10)).getData(anyString());
     }
 
     @Test
@@ -38,7 +37,7 @@ public class TestSaveProcessor {
         // Arrange
         Abilities mockAbilities = mock(Abilities.class);
         CosmeticDetails mockDetails = mock(CosmeticDetails.class);
-        ArrayList<Object> modelList = new ArrayList<>();
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
         modelList.add(mockDetails);
         SaveFileProcessor saveProcessor = new SaveFileProcessor();
@@ -55,9 +54,9 @@ public class TestSaveProcessor {
     @Test
     public void saveFile_WhenThereIsNoFileName_ItDoesNotRun() {
         // Arrange
-        iAbilities mockAbilities = mock(iAbilities.class);
-        iCosmeticDetails mockDetails = mock(iCosmeticDetails.class);
-        ArrayList<Object> modelList = new ArrayList<>();
+        Abilities mockAbilities = mock(Abilities.class);
+        CosmeticDetails mockDetails = mock(CosmeticDetails.class);
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
         modelList.add(mockDetails);
         SaveFileProcessor saveProcessor = new SaveFileProcessor();
@@ -66,7 +65,7 @@ public class TestSaveProcessor {
         saveProcessor.saveFile(new File(""), modelList);
 
         // Assert
-        verify(mockAbilities, times(0)).getAbilityScore(anyString());
-        verify(mockDetails, times(0)).getDetail(anyString());
+        verify(mockAbilities, times(0)).getData(anyString());
+        verify(mockDetails, times(0)).getData(anyString());
     }
 }

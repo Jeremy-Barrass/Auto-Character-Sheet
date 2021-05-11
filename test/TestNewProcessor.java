@@ -1,13 +1,15 @@
 import Exceptions.FileNotSavedException;
 import Gui.ActionProcessors.NewFileProcessor;
-import CharacterCosmetics.CosmeticDetails;
-import RulesLogic.Abilities;
+import Models.CharacterCosmetics.CosmeticDetails;
+import Models.Model;
+import Models.RulesLogic.Abilities;
 import SheetConstants.AbilityNames;
 import SheetConstants.CosmeticDetailsLabels;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static java.util.OptionalInt.of;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -18,16 +20,16 @@ public class TestNewProcessor {
         Abilities testAbilities = new Abilities();
         testAbilities.setIsSaved(true);
         for (String name : AbilityNames.listAbilityNames()) {
-            testAbilities.setAbilityScore(name, 10);
+            testAbilities.setData(name, 10);
         }
 
         CosmeticDetails testDetails = new CosmeticDetails();
         testDetails.setIsSaved(true);
         for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
-            testDetails.setDetail(detail, "Test detail");
+            testDetails.setData(detail, "Test detail");
         }
 
-        ArrayList<Object> modelList = new ArrayList<>();
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(testAbilities);
         modelList.add(testDetails);
 
@@ -38,11 +40,11 @@ public class TestNewProcessor {
 
         // Assert
         for (String name : AbilityNames.listAbilityNames()) {
-            assertEquals(0, testAbilities.getAbilityScore(name));
+            assertEquals(of(0), of(testAbilities.getData(name)));
         }
 
         for (String detail : CosmeticDetailsLabels.listCosmeticDetails()) {
-            assertEquals("", testDetails.getDetail(detail));
+            assertEquals("", testDetails.getData(detail));
         }
     }
 
@@ -55,7 +57,7 @@ public class TestNewProcessor {
         when(mockAbilities.getIsSaved()).thenReturn(true);
         when(mockDetails.getIsSaved()).thenReturn(true);
 
-        ArrayList<Object> modelList = new ArrayList<>();
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
         modelList.add(mockDetails);
 
@@ -75,9 +77,10 @@ public class TestNewProcessor {
         Abilities mockAbilities = mock(Abilities.class);
         CosmeticDetails mockDetails = mock(CosmeticDetails.class);
 
-        when(mockAbilities.getIsSaved()).thenReturn(true);        when(mockDetails.getIsSaved()).thenReturn(false);
+        when(mockAbilities.getIsSaved()).thenReturn(true);
+        when(mockDetails.getIsSaved()).thenReturn(false);
 
-        ArrayList<Object> modelList = new ArrayList<>();
+        ArrayList<Model> modelList = new ArrayList<>();
         modelList.add(mockAbilities);
         modelList.add(mockDetails);
 

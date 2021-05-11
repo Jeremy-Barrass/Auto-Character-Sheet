@@ -1,7 +1,9 @@
-import RulesLogic.Abilities;
+import Models.RulesLogic.Abilities;
 import org.junit.Assert;
 import org.junit.Test;
 import org.powermock.core.classloader.annotations.PrepareForTest;
+
+import static java.util.OptionalInt.of;
 
 @PrepareForTest(Abilities.class)
 
@@ -12,10 +14,10 @@ public class TestAbilities {
         Abilities abilities = new Abilities();
 
         // Act
-        abilities.setAbilityScore("Strength", -1);
+        abilities.setData("Strength", -1);
 
         // Assert
-        Assert.assertEquals(0, abilities.getAbilityScore("Strength"));
+        Assert.assertEquals(of(0), of(abilities.getData("Strength")));
     }
 
     @Test
@@ -24,15 +26,15 @@ public class TestAbilities {
         Abilities abilities = new Abilities();
 
         // Act
-        abilities.setAbilityScore("", 10);
+        abilities.setData("", 10);
 
         // Assert
-        Assert.assertEquals(0, abilities.getAbilityScore("Strength"));
-        Assert.assertEquals(0, abilities.getAbilityScore("Dexterity"));
-        Assert.assertEquals(0, abilities.getAbilityScore("Constitution"));
-        Assert.assertEquals(0, abilities.getAbilityScore("Intelligence"));
-        Assert.assertEquals(0, abilities.getAbilityScore("Wisdom"));
-        Assert.assertEquals(0, abilities.getAbilityScore("Charisma"));
+        Assert.assertEquals(of(0), of(abilities.getData("Strength")));
+        Assert.assertEquals(of(0), of(abilities.getData("Dexterity")));
+        Assert.assertEquals(of(0), of(abilities.getData("Constitution")));
+        Assert.assertEquals(of(0), of(abilities.getData("Intelligence")));
+        Assert.assertEquals(of(0), of(abilities.getData("Wisdom")));
+        Assert.assertEquals(of(0), of(abilities.getData("Charisma")));
     }
 
     @Test
@@ -41,12 +43,12 @@ public class TestAbilities {
         Abilities abilities = new Abilities();
 
         // Act
-        abilities.setAbilityScore("Strength", 10);
-        abilities.setAbilityScore("Intelligence", 14);
+        abilities.setData("Strength", 10);
+        abilities.setData("Intelligence", 14);
 
         // Assert
-        Assert.assertEquals(10, abilities.getAbilityScore("Strength"));
-        Assert.assertEquals(14, abilities.getAbilityScore("Intelligence"));
-        Assert.assertNotEquals(14, abilities.getAbilityScore("Constitution"));
+        Assert.assertEquals(of(10), of(abilities.getData("Strength")));
+        Assert.assertEquals(of(14), of(abilities.getData("Intelligence")));
+        Assert.assertNotEquals(of(14), of(abilities.getData("Constitution")));
     }
 }

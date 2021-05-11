@@ -8,7 +8,8 @@ import org.junit.runners.Suite;
         TestCosmeticDetails.class,
         TestSaveProcessor.class,
         TestLoadProcessor.class,
-        TestNewProcessor.class
+        TestNewProcessor.class,
+        TestModelFactory.class
 })
 
 public class ACSTestSuite { }
