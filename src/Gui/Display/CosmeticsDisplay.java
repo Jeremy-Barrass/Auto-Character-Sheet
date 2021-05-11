@@ -34,6 +34,6 @@ public class CosmeticsDisplay extends Display {
     public void update(Observable o, Object arg) {
         CosmeticDetails observableDetails = (CosmeticDetails) o;
         String changedDetail = (String) arg;
-        labelDataMap.get(changedDetail).setText(observableDetails.getData(changedDetail));
+        labelDataMap.get(changedDetail).setText(String.format("%s |", observableDetails.getData(changedDetail)));
     }
 }
