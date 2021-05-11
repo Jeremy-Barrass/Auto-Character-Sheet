@@ -51,4 +51,23 @@ public class TestAbilities {
         Assert.assertEquals(of(14), of(abilities.getData("Intelligence")));
         Assert.assertNotEquals(of(14), of(abilities.getData("Constitution")));
     }
+
+    @Test
+    public void testGetAbilityModifier_WhenCalledWithAnAbilityScore_ItReturnsTheCorrectModifier() {
+        // Arrange
+        Abilities abilities = new Abilities();
+        abilities.setData("Strength", 10);
+        abilities.setData("Intelligence", 14);
+        abilities.setData("Charisma", 9);
+
+        // Act
+        int resultStr = abilities.getAbilityModifier("Strength");
+        int resultInt = abilities.getAbilityModifier("Intelligence");
+        int resultCha = abilities.getAbilityModifier("Charisma");
+
+        // Assert
+        Assert.assertEquals(of(0), of(resultStr));
+        Assert.assertEquals(of(2), of(resultInt));
+        Assert.assertEquals(of(-1), of(resultCha));
+    }
 }
