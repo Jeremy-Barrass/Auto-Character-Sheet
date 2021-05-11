@@ -43,7 +43,7 @@ public class Abilities extends Model<Integer> {
     }
 
     public int getAbilityModifier(String ability) {
-        return (getAbilityScore(ability) - 10) / 2;
+        return Math.floorDiv((getAbilityScore(ability) - 10), 2);
     }
 
     private int getAbilityScore(String ability) {

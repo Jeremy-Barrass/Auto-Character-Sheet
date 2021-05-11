@@ -58,7 +58,7 @@ public class TestAbilities {
         Abilities abilities = new Abilities();
         abilities.setData("Strength", 10);
         abilities.setData("Intelligence", 14);
-        abilities.setData("Charisma", 8);
+        abilities.setData("Charisma", 9);
 
         // Act
         int resultStr = abilities.getAbilityModifier("Strength");
