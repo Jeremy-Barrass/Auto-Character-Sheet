@@ -9,7 +9,8 @@ import org.junit.runners.Suite;
         TestSaveProcessor.class,
         TestLoadProcessor.class,
         TestNewProcessor.class,
-        TestModelFactory.class
+        TestModelFactory.class,
+        TestHttpClientWrapper.class
 })
 
 public class ACSTestSuite { }
