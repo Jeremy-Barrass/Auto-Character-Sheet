@@ -10,18 +10,17 @@ import java.io.IOException;
 
 @PrepareForTest(HttpClientWrapper.class)
 public class TestHttpClientWrapper {
-    Thread serverThread;
+    TestServer server;
 
     @Before
     public void setUp() throws IOException {
-        Runnable server = new TestServer();
-        serverThread = new Thread(server);
-        serverThread.start();
+        server = new TestServer();
+        server.run();
     }
 
     @After
     public void tearDown(){
-        serverThread.interrupt();
+        server.finish();
     }
 
     @Test
@@ -30,9 +29,19 @@ public class TestHttpClientWrapper {
         HttpClientWrapper clientWrapper = new HttpClientWrapper();
 
         // act
-        String result = clientWrapper.getHtmlData("https://127.0.0.1:5000"); // String.format("https://127.0.0.1:5000%s/test/testHelpers/test-page.html", System.getProperty("user.dir")));
+        String result = clientWrapper.getHtmlData("http://127.0.0.1:5000"); // String.format("https://127.0.0.1:5000%s/test/testHelpers/test-page.html", System.getProperty("user.dir")));
 
         // assert
-        Assert.assertEquals("<!DOCTYPE html>\n<htmlL>\n<head>\n<meta charset=\"utf-8\">\nTest\n</head>\n<body>\nHello World!\n</body>\n</html>", result);
+        Assert.assertEquals("<!DOCTYPE html>\n"
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <meta charset=\"utf-8\">\n"
+                + "    <title>Test</title>\n"
+                + "  </head>\n"
+                + "  <body>\n"
+                + "    Hello World!\n"
+                + "  </body>\n"
+                + "</html>\n",
+                result);
     }
 }
